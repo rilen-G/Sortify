@@ -20,6 +20,10 @@ public class PlaybackController {
     public Optional<Song> playNext(){
         if (nowPlaying != null){
             history.push(nowPlaying);
+        }
+        if (nowPlaying == null && !queue.isEmpty()) {
+            nowPlaying = queue.poll();
+        } else {
             nowPlaying = queue.poll();
         }
         return Optional.ofNullable(nowPlaying);
@@ -32,6 +36,17 @@ public class PlaybackController {
             return Optional.of(nowPlaying);
         }
         return Optional.empty();
+    }
+
+    public Optional<Song> play(Song song) {
+        if (song == null) {
+            return Optional.empty();
+        }
+        if (nowPlaying != null) {
+            history.push(nowPlaying);
+        }
+        nowPlaying = song;
+        return Optional.of(song);
     }
 
     public Song current(){ return nowPlaying; }

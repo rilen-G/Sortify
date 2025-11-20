@@ -4,9 +4,15 @@
 
 
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.sortify.controller.ForYouController">
-    <Label text="For You"/>
-    <Button text="Generate" onAction="#generate"/>
-    <ListView fx:id="suggested"/>
-    <Button text="Save" onAction="#save"/>
+      fx:controller="com.example.sortify.controller.ForYouController"
+      spacing="12" styleClass="content">
+    <HBox alignment="CENTER_LEFT" spacing="10">
+        <Label text="For You" styleClass="section-title"/>
+        <Button text="Generate" onAction="#generate" styleClass="primary-btn"/>
+    </HBox>
+    <Label text="Your bespoke purple mix" styleClass="muted"/>
+    <ListView fx:id="suggested" VBox.vgrow="ALWAYS" styleClass="list"/>
+    <HBox alignment="CENTER_RIGHT">
+        <Button text="Save Mix" onAction="#save" styleClass="secondary-btn"/>
+    </HBox>
 </VBox>

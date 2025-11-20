@@ -37,5 +37,11 @@ public class AudioEngine {
             player=null;
         }
     }
+
+    public void setVolume(double volume) {
+        if (player != null) {
+            player.setVolume(Math.max(0, Math.min(1, volume)));
+        }
+    }
 }
 

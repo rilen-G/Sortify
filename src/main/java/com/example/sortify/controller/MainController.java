@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
+import javafx.animation.FadeTransition;
+import javafx.util.Duration;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,6 +20,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        FXServiceLocator.setMainController(this);
         navigate(Route.LIBRARY);
     }
 
@@ -34,10 +37,36 @@ public class MainController implements Initializable {
                     getClass().getResource(fxmlPath)
             );
             Parent view = loader.load();
-            contentHost.getChildren().setAll(view);
+            swapView(view);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void swapView(Parent newView) {
+        if (contentHost.getChildren().isEmpty()) {
+            contentHost.getChildren().setAll(newView);
+            fadeIn(newView);
+            return;
+        }
+
+        Parent old = (Parent) contentHost.getChildren().getFirst();
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(150), old);
+        fadeOut.setFromValue(1.0);
+        fadeOut.setToValue(0.0);
+        fadeOut.setOnFinished(evt -> {
+            contentHost.getChildren().setAll(newView);
+            fadeIn(newView);
+        });
+        fadeOut.play();
+    }
+
+    private void fadeIn(Parent node) {
+        node.setOpacity(0);
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(200), node);
+        fadeIn.setFromValue(0.0);
+        fadeIn.setToValue(1.0);
+        fadeIn.play();
     }
 }
