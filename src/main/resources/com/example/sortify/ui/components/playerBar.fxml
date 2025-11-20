@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.sortify.controller.PlayerBarController">
+    <left>
+        <Label fx:id="nowLabel" text="No song"/>
+    </left>
+
+    <center>
+        <HBox alignment="CENTER" spacing="10">
+            <Button fx:id="prevBtn" text="Prev" onAction="#prev"/>
+            <Button fx:id="playPauseBtn" text="Play" onAction="#toggle"/>
+            <Button fx:id="nextBtn" text="Next" onAction="#next"/>
+        </HBox>
+    </center>
+
+    <right>
+        <HBox spacing="10">
+            <Label fx:id="timeLabel" text="0:00 / 0:00"/>
+            <Slider fx:id="seek"/>
+            <Slider fx:id="vol"/>
+        </HBox>
+    </right>
+
+</BorderPane>

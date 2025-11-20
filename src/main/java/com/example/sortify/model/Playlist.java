@@ -3,6 +3,7 @@ package com.example.sortify.model;
 import java.util.LinkedList;
 
 public class Playlist {
+
     private String name;
 
     private final LinkedList<Song> tracks = new LinkedList<>();

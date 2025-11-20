@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.sortify.controller.ForYouController">
+    <Label text="For You"/>
+    <Button text="Generate" onAction="#generate"/>
+    <ListView fx:id="suggested"/>
+    <Button text="Save" onAction="#save"/>
+</VBox>

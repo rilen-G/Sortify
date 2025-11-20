@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.sortify.controller.PlaylistController">
+    <Label fx:id="plTitle" text="Playlist"/>
+    <ListView fx:id="trackList"/>
+    <Button text="Play All" onAction="#playAll"/>
+</VBox>

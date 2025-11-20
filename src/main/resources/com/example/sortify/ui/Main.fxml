@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<BorderPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.sortify.controller.MainController">
+
+    <left>
+        <fx:include source="components/sideBar.fxml"/>
+    </left>
+
+    <top>
+        <fx:include source="components/topBar.fxml"/>
+    </top>
+
+    <center>
+        <StackPane fx:id="contentHost"/>
+    </center>
+
+    <bottom>
+        <fx:include source="components/playerBar.fxml"/>
+    </bottom>
+
+</BorderPane>

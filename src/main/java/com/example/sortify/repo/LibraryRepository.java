@@ -12,11 +12,12 @@ public class LibraryRepository {
     private final ArrayList<Song> library = new ArrayList<>();
 
     public ArrayList<Song> getLibrary(){ return library; }
+
     public HashMap<String, Song> byId(){ return byId; }
 
     public void loadFromCsv(Path csv) throws IOException {
         try (BufferedReader br = Files.newBufferedReader(csv)) {
-            String line; br.readLine(); // skip header if present
+            String line; br.readLine(); // skip header
             while ((line = br.readLine()) != null) {
                 String[] t = line.split(",", -1);
                 // id,title,artist,album,genre,durationSec,filePath
@@ -41,7 +42,7 @@ public class LibraryRepository {
     }
 
     public void importFromFolder(Path folder) throws IOException {
-        // Walk files; for mp3/m4a/wav, create Song with filename as title fallback
+        // Walk files; for mp3 create Song with filename as title fallback
         Files.walk(folder)
                 .filter(p -> !Files.isDirectory(p))
                 .filter(p -> p.toString().toLowerCase().endsWith(".mp4"))
@@ -59,6 +60,11 @@ public class LibraryRepository {
         byId.put(s.getId(), s);
     }
 
-    private String escape(String v){ return v == null ? "" : v.replace(",", ";"); }
+    private String escape(String value) {
+        if (value == null) {
+            return "";
+        }
+        return value.replace(",", ";");
+    }
 }
 
