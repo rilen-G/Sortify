@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.layout.*?>
 <BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.sortify.controller.MainController">
+            stylesheets="css/app.css"
+            fx:controller="com.example.sortify.controller.MainController"
+            prefHeight="800" prefWidth="1280"
+            styleClass="root-pane">
 
     <left>
         <fx:include source="components/sideBar.fxml"/>

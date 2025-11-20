@@ -3,8 +3,9 @@
 <?import javafx.scene.layout.*?>
 
 <HBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.sortify.controller.TopBarController">
-    <TextField fx:id="searchField"/>
-    <ChoiceBox fx:id="sortChoice"/>
-    <Button text="Sort" onAction="#sort"/>
+      fx:controller="com.example.sortify.controller.TopBarController"
+      spacing="12" alignment="CENTER_LEFT" styleClass="topbar">
+    <TextField fx:id="searchField" promptText="Search songs, artists..." styleClass="search" HBox.hgrow="ALWAYS" />
+    <ChoiceBox fx:id="sortChoice" prefWidth="180" styleClass="pill-choice"/>
+    <Button text="Sort" onAction="#sort" styleClass="primary-btn"/>
 </HBox>
