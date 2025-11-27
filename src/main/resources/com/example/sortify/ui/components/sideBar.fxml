@@ -3,10 +3,23 @@
 <?import javafx.scene.control.*?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.sortify.controller.SideBarController">
-    <Label text="Sortify"/>
-    <Button text="Home" onAction="#goLibrary"/>
-    <Button text="For You" onAction="#goForYou"/>
-    <Button text="Playlists" onAction="#goPlaylist"/>
-    <ListView fx:id="playlistsList" />
+      fx:controller="com.example.sortify.controller.SideBarController"
+      spacing="20" alignment="TOP_LEFT"
+      styleClass="sidebar">
+    <Label text="Sortify" styleClass="brand"/>
+
+    <VBox spacing="10" styleClass="nav-group">
+        <Button text="⌂   Library" onAction="#goLibrary" styleClass="nav-btn"/>
+        <Button text="❤   For You" onAction="#goForYou" styleClass="nav-btn"/>
+        <Button text="☊   Playlists" onAction="#goPlaylist" styleClass="nav-btn"/>
+        <Button text="★   Insights" onAction="#goStats" styleClass="nav-btn"/>
+    </VBox>
+
+    <Label text="Playlists" styleClass="section-title"/>
+    <ListView fx:id="playlistsList" styleClass="pill-list"/>
+
+    <HBox spacing="8">
+        <Button text="+ New" onAction="#newPlaylist" styleClass="ghost-btn"/>
+        <Button text="Import" onAction="#importFolder" styleClass="ghost-btn"/>
+    </HBox>
 </VBox>

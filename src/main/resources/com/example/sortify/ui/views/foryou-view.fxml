@@ -2,11 +2,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.control.*?>
 
-
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.sortify.controller.ForYouController">
-    <Label text="For You"/>
-    <Button text="Generate" onAction="#generate"/>
-    <ListView fx:id="suggested"/>
-    <Button text="Save" onAction="#save"/>
+      fx:controller="com.example.sortify.controller.ForYouController"
+      spacing="14" styleClass="view">
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="For You" styleClass="view-title"/>
+        <Label text="Smart pulls based on your spins" styleClass="muted"/>
+    </HBox>
+
+    <HBox spacing="10">
+        <Button text="Generate" onAction="#generate" styleClass="primary-btn"/>
+        <Button text="Save to Playlist" onAction="#save" styleClass="ghost-btn"/>
+    </HBox>
+
+    <ListView fx:id="suggested" styleClass="pill-list" prefHeight="520"/>
 </VBox>

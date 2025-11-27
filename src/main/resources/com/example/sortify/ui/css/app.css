@@ -1,0 +1,188 @@
+/* Purple-black hi-fi theme */
+.app-root {
+    -fx-background-color: linear-gradient(to bottom right, #0c0a14 0%, #120b25 55%, #0b0718 100%);
+    -surface: #151125;
+    -surface-2: #1c1733;
+    -accent: #b370ff;
+    -accent-strong: #d8b4ff;
+    -muted: #9c93b6;
+    -text: #f5f1ff;
+    -fx-text-fill: -text;
+    -fx-font-family: "Segoe UI Semibold", "Poppins", "Helvetica Neue";
+}
+
+.view {
+    -fx-padding: 24;
+}
+
+.view-title {
+    -fx-text-fill: -text;
+    -fx-font-size: 24px;
+    -fx-font-weight: 700;
+}
+
+.sidebar {
+    -fx-padding: 24 20 24 20;
+    -fx-background-color: rgba(255,255,255,0.03);
+    -fx-spacing: 16;
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: rgba(255,255,255,0.06);
+}
+
+.brand {
+    -fx-text-fill: -text;
+    -fx-font-size: 26px;
+    -fx-font-weight: 800;
+    -fx-effect: dropshadow(gaussian, rgba(179,112,255,0.45), 12, 0.4, 0, 0);
+}
+
+.nav-btn, .ghost-btn, .primary-btn {
+    -fx-pref-height: 40;
+    -fx-background-radius: 12;
+    -fx-font-size: 14px;
+    -fx-text-fill: -text;
+}
+
+.nav-btn {
+    -fx-background-color: rgba(255,255,255,0.04);
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 14;
+}
+
+.nav-btn:hover {
+    -fx-background-color: rgba(179,112,255,0.18);
+}
+
+.ghost-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255,255,255,0.16);
+    -fx-border-radius: 12;
+    -fx-padding: 0 14;
+}
+
+.ghost-btn:hover {
+    -fx-border-color: -accent;
+    -fx-text-fill: -accent-strong;
+}
+
+.primary-btn {
+    -fx-background-color: #b370ff;
+    -fx-padding: 0 18;
+}
+
+.primary-btn:hover {
+    -fx-background-color: linear-gradient(to right, #c387ff, #927cff);
+}
+
+.topbar {
+    -fx-padding: 16 20;
+    -fx-background-color: rgba(255,255,255,0.025);
+    -fx-border-color: rgba(255,255,255,0.04);
+    -fx-border-width: 0 0 1 0;
+}
+
+.search-field, .pill-control {
+    -fx-background-radius: 14;
+    -fx-background-color: rgba(255,255,255,0.05);
+    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-border-radius: 14;
+    -fx-text-fill: -text;
+    -fx-prompt-text-fill: -muted;
+    -fx-padding: 10 14;
+}
+
+.muted {
+    -fx-text-fill: -muted;
+}
+
+.tiny {
+    -fx-text-fill: -muted;
+    -fx-font-size: 11px;
+}
+
+.pill-list {
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-border-radius: 14;
+    -fx-background-radius: 14;
+    -fx-padding: 8;
+}
+
+.pill-list .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -text;
+    -fx-padding: 10 12;
+}
+
+.pill-list .list-cell:hover {
+    -fx-background-color: rgba(179,112,255,0.15);
+}
+
+.player-bar {
+    -fx-padding: 14 22;
+    -fx-background-color: -surface;
+    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-border-width: 1 0 0 0;
+}
+
+.glass {
+    -fx-background-color: rgba(255,255,255,0.03);
+    -fx-border-color: rgba(255,255,255,0.08);
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+}
+
+.table-view {
+    -fx-control-inner-background: transparent;
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: rgba(255,255,255,0.05);
+}
+
+.table-view .column-header {
+    -fx-background-color: rgba(255,255,255,0.06);
+    -fx-text-fill: -muted;
+}
+
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: -text;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: rgba(179,112,255,0.18);
+}
+
+.progress-row {
+    -fx-padding: 4 18 8 18;
+}
+
+.progress-slider {
+    -fx-padding: 4 0 4 0;
+    -fx-accent: #b370ff;
+}
+
+.progress-slider > .track {
+    -fx-background-color: rgba(255,255,255,0.12);
+    -fx-background-radius: 50;
+    -fx-pref-height: 6;
+}
+
+.progress-slider > .thumb {
+    -fx-background-color: #d8b4ff;
+    -fx-background-radius: 50;
+    -fx-pref-height: 12;
+    -fx-pref-width: 12;
+    -fx-effect: dropshadow(gaussian, rgba(179,112,255,0.45), 8, 0.3, 0, 0);
+}
+
+.time-label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-min-width: -1;
+}
+.left-time {
+    -fx-alignment: center-right;
+}
+.right-time {
+    -fx-alignment: center-left;
+}

@@ -3,21 +3,26 @@
 <?import javafx.scene.control.*?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.sortify.controller.LibraryController">
-    <Label text="All Songs"/>
-    <TableView fx:id="table">
+      fx:controller="com.example.sortify.controller.LibraryController"
+      spacing="16" styleClass="view">
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label text="Library" styleClass="view-title"/>
+        <Label text="Sorted and ready" styleClass="muted"/>
+    </HBox>
+
+    <TableView fx:id="table" styleClass="glass">
         <columns>
-            <TableColumn fx:id="colNum" text="#"/>
-            <TableColumn fx:id="colTitle" text="Title"/>
-            <TableColumn fx:id="colArtist" text="Artist"/>
-            <TableColumn fx:id="colAlbum" text="Album"/>
-            <TableColumn fx:id="colGenre" text="Genre"/>
-            <TableColumn fx:id="colDuration" text="Duration"/>
+            <TableColumn fx:id="colNum" text="#" prefWidth="50"/>
+            <TableColumn fx:id="colTitle" text="Title" prefWidth="200"/>
+            <TableColumn fx:id="colArtist" text="Artist" prefWidth="180"/>
+            <TableColumn fx:id="colAlbum" text="Album" prefWidth="180"/>
+            <TableColumn fx:id="colGenre" text="Genre" prefWidth="120"/>
+            <TableColumn fx:id="colDuration" text="Duration" prefWidth="120"/>
         </columns>
     </TableView>
 
-    <HBox spacing="8">
-        <Button text="Add to Queue" onAction="#addToQueue"/>
-        <Button text="Add to Playlist" onAction="#addToPlaylist"/>
+    <HBox spacing="10">
+        <Button text="Add to Queue" onAction="#addToQueue" styleClass="primary-btn"/>
+        <Button text="Add to Playlist" onAction="#addToPlaylist" styleClass="ghost-btn"/>
     </HBox>
 </VBox>

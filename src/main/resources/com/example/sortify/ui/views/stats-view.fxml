@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.sortify.controller.StatsController"
+      spacing="16" styleClass="view">
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label text="Insights" styleClass="view-title"/>
+        <Button text="Refresh" onAction="#refresh" styleClass="ghost-btn"/>
+    </HBox>
+
+    <HBox spacing="16">
+        <BarChart fx:id="topPlays" title="Top Played" VBox.vgrow="ALWAYS" prefHeight="320">
+            <xAxis>
+                <CategoryAxis fx:id="topAxis"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis label="Plays"/>
+            </yAxis>
+        </BarChart>
+
+        <PieChart fx:id="genrePie" title="Genres" prefWidth="360"/>
+    </HBox>
+
+    <VBox spacing="8">
+        <Label text="Recently Played" styleClass="muted"/>
+        <ListView fx:id="recentList" styleClass="pill-list" prefHeight="180"/>
+    </VBox>
+</VBox>

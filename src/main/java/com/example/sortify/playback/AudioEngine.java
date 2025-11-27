@@ -8,12 +8,27 @@ import java.io.File;
 public class AudioEngine {
 
     private MediaPlayer player;
+    private double volume = 0.65;
 
     public void play(Song s, Runnable onEnd){
         stop();
-        String uri = new File(s.getFilePath()).toURI().toString();
+        String path = s.getFilePath();
+        String uri;
+        File f = new File(path);
+        if (f.exists()){
+            uri = f.toURI().toString();
+        } else {
+            // fallback to classpath resource (packaged jar)
+            var res = getClass().getResource("/com/example/sortify/songs/" + path);
+            if (res == null){
+                System.err.println("Audio file not found: " + path);
+                return;
+            }
+            uri = res.toExternalForm();
+        }
         Media media = new Media(uri);
         player = new MediaPlayer(media);
+        player.setVolume(volume);
         player.setOnEndOfMedia(onEnd);
         player.play();
     }
@@ -30,6 +45,13 @@ public class AudioEngine {
         }
     }
 
+    public void setVolume(double v){
+        volume = v;
+        if (player != null){
+            player.setVolume(v);
+        }
+    }
+
     public void stop(){
         if (player != null){
             player.stop();
@@ -37,5 +59,8 @@ public class AudioEngine {
             player=null;
         }
     }
-}
 
+    public MediaPlayer getPlayer(){
+        return player;
+    }
+}

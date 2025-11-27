@@ -1,27 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.sortify.controller.PlayerBarController">
-    <left>
-        <Label fx:id="nowLabel" text="No song"/>
-    </left>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
-    <center>
-        <HBox alignment="CENTER" spacing="10">
-            <Button fx:id="prevBtn" text="Prev" onAction="#prev"/>
-            <Button fx:id="playPauseBtn" text="Play" onAction="#toggle"/>
-            <Button fx:id="nextBtn" text="Next" onAction="#next"/>
+<VBox alignment="CENTER" prefHeight="90" spacing="4" styleClass="player-bar" stylesheets="@../css/app.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.sortify.controller.PlayerBarController">
+
+    <VBox alignment="CENTER" spacing="0" styleClass="progress-row">
+        <Slider fx:id="progress" maxWidth="640" minWidth="480" prefWidth="640" styleClass="progress-slider" />
+
+        <HBox alignment="CENTER" spacing="4">
+            <Label fx:id="currentTimeLabel" styleClass="tiny, time-label" text="0:00" />
+            <Label styleClass="tiny, time-label" text="/" />
+            <Label fx:id="totalTimeLabel" styleClass="tiny, time-label" text="0:00" />
         </HBox>
-    </center>
+    </VBox>
 
-    <right>
-        <HBox spacing="10">
-            <Label fx:id="timeLabel" text="0:00 / 0:00"/>
-            <Slider fx:id="seek"/>
-            <Slider fx:id="vol"/>
+    <StackPane VBox.vgrow="ALWAYS">
+
+        <BorderPane pickOnBounds="false">
+            <left>
+                <VBox alignment="CENTER_LEFT" spacing="4" translateY="-50" BorderPane.alignment="CENTER_LEFT">
+                    <Label fx:id="nowLabel" styleClass="muted" text="Nothing playing" />
+                </VBox>
+            </left>
+            <right>
+                <HBox alignment="CENTER_RIGHT" spacing="10" translateY="-50" BorderPane.alignment="CENTER_RIGHT">
+                    <Slider fx:id="vol" max="100" maxWidth="100" />
+                </HBox>
+            </right>
+        </BorderPane>
+
+        <HBox alignment="CENTER" pickOnBounds="false" spacing="12">
+            <Button fx:id="prevBtn" onAction="#prev" styleClass="ghost-btn" text="|&lt;" />
+            <Button fx:id="playPauseBtn" onAction="#toggle" styleClass="primary-btn" text="Play" />
+            <Button fx:id="nextBtn" onAction="#next" styleClass="ghost-btn" text="&gt;|" />
         </HBox>
-    </right>
 
-</BorderPane>
+    </StackPane>
+
+</VBox>

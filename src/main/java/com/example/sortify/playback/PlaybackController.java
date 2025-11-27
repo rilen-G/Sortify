@@ -18,10 +18,12 @@ public class PlaybackController {
     }
 
     public Optional<Song> playNext(){
-        if (nowPlaying != null){
-            history.push(nowPlaying);
+        if (nowPlaying == null){
             nowPlaying = queue.poll();
+            return Optional.ofNullable(nowPlaying);
         }
+        history.push(nowPlaying);
+        nowPlaying = queue.poll();
         return Optional.ofNullable(nowPlaying);
     }
 

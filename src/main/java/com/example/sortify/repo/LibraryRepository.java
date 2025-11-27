@@ -16,15 +16,50 @@ public class LibraryRepository {
     public HashMap<String, Song> byId(){ return byId; }
 
     public void loadFromCsv(Path csv) throws IOException {
+        Path resourceSongsDir = null;
+        try {
+            resourceSongsDir = Paths.get(getClass()
+                    .getResource("/com/example/sortify/songs").toURI());
+        } catch (Exception ignored){}
+
         try (BufferedReader br = Files.newBufferedReader(csv)) {
             String line; br.readLine(); // skip header
             while ((line = br.readLine()) != null) {
                 String[] t = line.split(",", -1);
                 // id,title,artist,album,genre,durationSec,filePath
+                int duration = parseDuration(t[5]);
+                String rawPath = t[6];
+                String resolvedPath = rawPath;
+                Path raw = Paths.get(rawPath);
+                if (!raw.isAbsolute() && resourceSongsDir != null){
+                    Path candidate = resourceSongsDir.resolve(rawPath);
+                    if (Files.exists(candidate)){
+                        resolvedPath = candidate.toAbsolutePath().toString();
+                    }
+                }
                 Song s = new Song(t[0], t[1], t[2], t[3], t[4],
-                        Integer.parseInt(t[5]), t[6]);
+                        duration, resolvedPath);
                 addOrReplace(s);
             }
+        }
+    }
+
+    private int parseDuration(String token){
+        if (token == null || token.isBlank()) return 0;
+        if (token.contains(":")){
+            String[] p = token.split(":");
+            try {
+                int minutes = Integer.parseInt(p[0]);
+                int seconds = Integer.parseInt(p[1]);
+                return minutes * 60 + seconds;
+            } catch (NumberFormatException e){
+                return 0;
+            }
+        }
+        try {
+            return Integer.parseInt(token);
+        } catch (NumberFormatException e){
+            return 0;
         }
     }
 
@@ -45,7 +80,10 @@ public class LibraryRepository {
         // Walk files; for mp3 create Song with filename as title fallback
         Files.walk(folder)
                 .filter(p -> !Files.isDirectory(p))
-                .filter(p -> p.toString().toLowerCase().endsWith(".mp4"))
+                .filter(p -> {
+                    String name = p.toString().toLowerCase();
+                    return name.endsWith(".mp3") || name.endsWith(".mp4");
+                })
 
                         .forEach(p -> {
                     String id = UUID.randomUUID().toString();

@@ -14,10 +14,11 @@ public class MainController implements Initializable {
     @FXML
     private StackPane contentHost;
 
-    public enum Route { LIBRARY, PLAYLIST, FORYOU }
+    public enum Route { LIBRARY, PLAYLIST, FORYOU, STATS }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        FXServiceLocator.setMainController(this);
         navigate(Route.LIBRARY);
     }
 
@@ -27,6 +28,7 @@ public class MainController implements Initializable {
                 case LIBRARY -> "/com/example/sortify/ui/views/library-view.fxml";
                 case PLAYLIST -> "/com/example/sortify/ui/views/playlist-view.fxml";
                 case FORYOU  -> "/com/example/sortify/ui/views/foryou-view.fxml";
+                case STATS   -> "/com/example/sortify/ui/views/stats-view.fxml";
             };
 
 

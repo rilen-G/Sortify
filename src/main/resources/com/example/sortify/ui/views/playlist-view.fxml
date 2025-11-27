@@ -3,8 +3,19 @@
 <?import javafx.scene.control.*?>
 
 <VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.sortify.controller.PlaylistController">
-    <Label fx:id="plTitle" text="Playlist"/>
-    <ListView fx:id="trackList"/>
-    <Button text="Play All" onAction="#playAll"/>
+      fx:controller="com.example.sortify.controller.PlaylistController"
+      spacing="14" styleClass="view">
+    <HBox spacing="12" alignment="CENTER_LEFT">
+        <Label fx:id="plTitle" text="Playlist" styleClass="view-title"/>
+        <Button text="Rename" onAction="#rename" styleClass="ghost-btn"/>
+        <Button text="Play All" onAction="#playAll" styleClass="primary-btn"/>
+    </HBox>
+
+    <ListView fx:id="trackList" styleClass="pill-list" prefHeight="500"/>
+
+    <HBox spacing="10">
+        <Button text="Move Up" onAction="#moveUp" styleClass="ghost-btn"/>
+        <Button text="Move Down" onAction="#moveDown" styleClass="ghost-btn"/>
+        <Button text="Remove Selected" onAction="#remove" styleClass="ghost-btn"/>
+    </HBox>
 </VBox>
