@@ -3,14 +3,11 @@ package com.example.sortify.controller;
 import com.example.sortify.model.Playlist;
 import com.example.sortify.model.Song;
 import com.example.sortify.util.Actions;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,7 +16,9 @@ import java.util.stream.Collectors;
 public class PlaylistController {
 
     @FXML private Label plTitle;
-    @FXML private ListView<Song> trackList;
+    @FXML private TableView<Song> trackList;
+    @FXML private TableColumn<Song, String> colTitle;
+    @FXML private TableColumn<Song, String> colArtist;
 
     private final ObservableList<Song> currentTracks = FXCollections.observableArrayList();
 
@@ -28,13 +27,12 @@ public class PlaylistController {
         FXServiceLocator.registerPlaylistController(this);
         trackList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         trackList.setItems(currentTracks);
-        trackList.setCellFactory(list -> new ListCell<>() {
-            @Override
-            protected void updateItem(Song item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty || item == null ? "" : item.getTitle() + " — " + item.getArtist());
-            }
-        });
+
+        colTitle.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getTitle()));
+        colArtist.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getArtist()));
+
         FXServiceLocator.activePlaylistProperty().addListener((obs, old, pl) -> loadPlaylist(pl));
         loadPlaylist(FXServiceLocator.activePlaylist());
     }
@@ -95,6 +93,7 @@ public class PlaylistController {
         FXServiceLocator.undo().execute(new Actions.MoveInPlaylist(pl, s, idx, target));
         refresh();
         trackList.getSelectionModel().select(target);
+        trackList.scrollTo(target);
         FXServiceLocator.savePlaylists();
     }
 

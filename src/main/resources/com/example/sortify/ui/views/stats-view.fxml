@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.chart.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.control.*?>
 
-<VBox xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.sortify.controller.StatsController"
-      spacing="16" styleClass="view">
-    <HBox spacing="12" alignment="CENTER_LEFT">
-        <Label text="Insights" styleClass="view-title"/>
-        <Button text="Refresh" onAction="#refresh" styleClass="ghost-btn"/>
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import java.net.URL?>
+<VBox spacing="16" styleClass="view" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/25" fx:controller="com.example.sortify.controller.StatsController">
+
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label styleClass="view-title" text="Insights" />
+        <Button onAction="#refresh" styleClass="ghost-btn" text="Refresh" />
     </HBox>
 
     <HBox spacing="16">
-        <BarChart fx:id="topPlays" title="Top Played" VBox.vgrow="ALWAYS" prefHeight="320">
+        <BarChart fx:id="topPlays" prefHeight="320" title="Top Played" VBox.vgrow="ALWAYS">
             <xAxis>
-                <CategoryAxis fx:id="topAxis"/>
+                <CategoryAxis fx:id="topAxis" />
             </xAxis>
             <yAxis>
-                <NumberAxis label="Plays"/>
+                <NumberAxis label="Plays" />
             </yAxis>
         </BarChart>
 
-        <PieChart fx:id="genrePie" title="Genres" prefWidth="360"/>
+        <PieChart fx:id="genrePie" prefWidth="360" title="Genres" />
     </HBox>
 
     <VBox spacing="8">
-        <Label text="Recently Played" styleClass="muted"/>
-        <ListView fx:id="recentList" styleClass="pill-list" prefHeight="180"/>
+        <Label styleClass="muted" text="Recently Played" />
+        <ListView fx:id="recentList" prefHeight="180" styleClass="pill-list" />
     </VBox>
 </VBox>
