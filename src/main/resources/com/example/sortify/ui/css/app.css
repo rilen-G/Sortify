@@ -186,3 +186,12 @@
 .right-time {
     -fx-alignment: center-left;
 }
+
+.pill-list .list-cell:selected {
+    -fx-background-color: rgba(179,112,255,0.25);
+    -fx-text-fill: -text;
+}
+
+.pill-list .list-cell:selected:hover {
+    -fx-background-color: rgba(179,112,255,0.35);
+}

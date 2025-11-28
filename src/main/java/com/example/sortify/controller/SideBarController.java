@@ -2,6 +2,9 @@ package com.example.sortify.controller;
 
 import com.example.sortify.model.Playlist;
 import com.example.sortify.model.Song;
+import com.example.sortify.util.Actions;
+import com.example.sortify.util.PlaylistCsvStore;
+import com.example.sortify.util.UndoManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -10,13 +13,19 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.Window;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 
 public class SideBarController {
 
     @FXML
     private ListView<Playlist> playlistsList;
+
+    private final UndoManager undoManager = new UndoManager();
+
+    private final Path playlistsFile = Paths.get("data/playlists.csv");
 
     @FXML
     public void initialize() {
@@ -29,7 +38,7 @@ public class SideBarController {
             }
         });
         Playlist active = FXServiceLocator.activePlaylist();
-        if (active != null){
+        if (active != null) {
             playlistsList.getSelectionModel().select(active);
         }
         FXServiceLocator.activePlaylistProperty().addListener((obs, old, pl) -> {
@@ -95,5 +104,21 @@ public class SideBarController {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void deletePlaylist() {
+        Playlist selected = playlistsList.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+
+        int idx = FXServiceLocator.playlists().indexOf(selected);
+
+        Actions.DeletePlaylist action = new Actions.DeletePlaylist(
+                FXServiceLocator.playlists(), // always master list
+                selected,
+                idx,
+                playlistsFile                  // CSV path
+        );
+
+        undoManager.execute(action);
     }
 }

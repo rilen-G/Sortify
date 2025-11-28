@@ -21,5 +21,6 @@
     <HBox spacing="8">
         <Button text="+ New" onAction="#newPlaylist" styleClass="ghost-btn"/>
         <Button text="Import" onAction="#importFolder" styleClass="ghost-btn"/>
+        <Button text="Delete" onAction="#deletePlaylist" styleClass="ghost-btn"/>
     </HBox>
 </VBox>
