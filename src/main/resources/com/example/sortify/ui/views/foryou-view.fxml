@@ -15,5 +15,10 @@
         <Button text="Save to Playlist" onAction="#save" styleClass="ghost-btn"/>
     </HBox>
 
-    <ListView fx:id="suggested" styleClass="pill-list" prefHeight="520"/>
+    <TableView fx:id="suggested" styleClass="glass" prefHeight="520">
+        <columns>
+            <TableColumn fx:id="colTitle" text="Title" prefWidth="300"/>
+            <TableColumn fx:id="colArtist" text="Artist" prefWidth="250"/>
+        </columns>
+    </TableView>
 </VBox>

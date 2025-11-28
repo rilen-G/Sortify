@@ -2,9 +2,9 @@ package com.example.sortify.controller;
 
 import com.example.sortify.model.Playlist;
 import com.example.sortify.model.Song;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -13,17 +13,18 @@ import java.util.stream.Collectors;
 
 public class ForYouController {
 
-    @FXML private ListView<Song> suggested;
+    @FXML private TableView<Song> suggested;
+    @FXML private TableColumn<Song, String> colTitle;
+    @FXML private TableColumn<Song, String> colArtist;
 
     @FXML
     public void initialize(){
-        suggested.setCellFactory(list -> new ListCell<>() {
-            @Override
-            protected void updateItem(Song item, boolean empty) {
-                super.updateItem(item, empty);
-                setText(empty || item == null ? "" : item.getTitle() + " — " + item.getArtist());
-            }
-        });
+        suggested.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+
+        colTitle.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getTitle()));
+        colArtist.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getArtist()));
     }
 
     @FXML

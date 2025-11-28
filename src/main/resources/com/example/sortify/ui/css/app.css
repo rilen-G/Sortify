@@ -186,3 +186,15 @@
 .right-time {
     -fx-alignment: center-left;
 }
+
+.chart-bar-chart .axis-label {
+    -fx-text-fill: #FFFFFF;
+}
+
+.chart-title {
+    -fx-text-fill: #FFFFFF;
+}
+
+.chart-bar-chart .axis-tick-label {
+    -fx-text-fill: #FFFFFF;
+}
