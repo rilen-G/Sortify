@@ -40,8 +40,7 @@ public class PlaylistController {
     @FXML private void playAll() {
         Playlist pl = FXServiceLocator.activePlaylist();
         if (pl == null || pl.tracks().isEmpty()) return;
-        FXServiceLocator.playback().getQueue().clear();
-        FXServiceLocator.playback().enqueueAll(pl.tracks());
+        FXServiceLocator.playback().resetQueue(pl.tracks());
     }
 
     @FXML private void remove() {

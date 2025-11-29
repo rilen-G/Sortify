@@ -24,8 +24,6 @@ public class TopBarController {
     @FXML
     private Label runtimeLabel;
     @FXML
-    private TextField binaryField;
-    @FXML
     private Button undoBtn;
     @FXML
     private Button redoBtn;
@@ -64,7 +62,7 @@ public class TopBarController {
 
     @FXML
     private void binarySearch() {
-        String term = binaryField.getText();
+        String term = searchField.getText();
         if (term == null || term.isBlank()) return;
         Comparator<Song> cmp = Comparator.comparing(Song::getTitle, String.CASE_INSENSITIVE_ORDER);
         List<Song> data = new ArrayList<>(FXServiceLocator.library().getLibrary());

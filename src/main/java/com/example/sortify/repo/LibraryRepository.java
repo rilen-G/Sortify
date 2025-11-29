@@ -15,6 +15,13 @@ public class LibraryRepository {
 
     public HashMap<String, Song> byId(){ return byId; }
 
+    public void loadFromCsv(InputStream csvStream) throws IOException {
+        Path temp = Files.createTempFile("sortify_songs", ".csv");
+        temp.toFile().deleteOnExit();
+        Files.copy(csvStream, temp, StandardCopyOption.REPLACE_EXISTING);
+        loadFromCsv(temp);
+    }
+
     public void loadFromCsv(Path csv) throws IOException {
         Path resourceSongsDir = null;
         try {
@@ -78,19 +85,19 @@ public class LibraryRepository {
 
     public void importFromFolder(Path folder) throws IOException {
         // Walk files; for mp3 create Song with filename as title fallback
-        Files.walk(folder)
-                .filter(p -> !Files.isDirectory(p))
-                .filter(p -> {
-                    String name = p.toString().toLowerCase();
-                    return name.endsWith(".mp3") || name.endsWith(".mp4");
-                })
-
-                        .forEach(p -> {
-                    String id = UUID.randomUUID().toString();
-                    String title = p.getFileName().toString();
-                    Song s = new Song(id, title, "Unknown", "Unknown", "Unknown", 0, p.toAbsolutePath().toString());
-                    addOrReplace(s);
-                });
+        try (var paths = Files.walk(folder)) {
+            paths.filter(p -> !Files.isDirectory(p))
+                    .filter(p -> {
+                        String name = p.toString().toLowerCase();
+                        return name.endsWith(".mp3") || name.endsWith(".mp4");
+                    })
+                    .forEach(p -> {
+                        String id = UUID.randomUUID().toString();
+                        String title = p.getFileName().toString();
+                        Song s = new Song(id, title, "Unknown", "Unknown", "Unknown", 0, p.toAbsolutePath().toString());
+                        addOrReplace(s);
+                    });
+        }
     }
 
     private void addOrReplace(Song s){

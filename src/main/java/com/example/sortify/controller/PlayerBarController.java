@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
 
@@ -33,13 +34,18 @@ public class PlayerBarController {
         vol.setValue(65);
 
         progress.setDisable(true);
-        progress.valueChangingProperty().addListener((obs, was, is) -> {
-            if (!is) seekToSlider();
+
+        progress.valueChangingProperty().addListener((obs, wasChanging, isChanging) -> {
+            if (!isChanging) seekToSlider();
         });
-        progress.setOnMouseReleased(e -> seekToSlider());
-        progress.setOnMouseClicked(e -> seekToSlider());
-        progress.valueProperty().addListener((obs, old, val) -> updateProgressFill());
-        progress.skinProperty().addListener((obs, old, skin) -> Platform.runLater(this::updateProgressFill));
+
+        progress.valueProperty().addListener((obs, oldVal, newVal) -> {
+            if (!progress.isValueChanging()) {
+                if (Math.abs(newVal.doubleValue() - oldVal.doubleValue()) > 500) {
+                    seekToSlider();
+                }
+            }
+        });
     }
 
     @FXML
@@ -84,7 +90,7 @@ public class PlayerBarController {
     }
 
     private void playSong(Song s){
-        nowLabel.setText(s.getTitle() + " — " + s.getArtist());
+        nowLabel.setText(s.getTitle() + " - " + s.getArtist());
         playPauseBtn.setText("Pause");
         playing = true;
         s.incrementPlayCount();
@@ -106,12 +112,11 @@ public class PlayerBarController {
         currentTimeLabel.setText("0:00");
 
         mp.totalDurationProperty().addListener((obs, old, total) -> applyTotal(total));
-        mp.setOnReady(() -> {
-            applyTotal(mp.getMedia().getDuration());
-        });
+        mp.setOnReady(() -> applyTotal(mp.getMedia().getDuration()));
         applyTotal(mp.getMedia().getDuration());
 
         mp.currentTimeProperty().addListener((obs, old, val) -> {
+            // Only update slider if user is NOT dragging it
             if (!progress.isValueChanging()) {
                 progress.setValue(val.toMillis());
             }
@@ -123,26 +128,11 @@ public class PlayerBarController {
         if (total == null || total.isUnknown()) return;
         progress.setMax(total.toMillis());
         totalTimeLabel.setText(formatDuration(total));
-        updateProgressFill();
     }
 
     private void seekToSlider(){
         if (boundPlayer == null) return;
         boundPlayer.seek(Duration.millis(progress.getValue()));
-    }
-
-    private void updateProgressFill(){
-        var track = progress.lookup(".track");
-        if (track == null) {
-            Platform.runLater(this::updateProgressFill);
-            return;
-        }
-        double max = progress.getMax();
-        double val = progress.getValue();
-        double pct = max <= 0 ? 0 : Math.max(0, Math.min(1.0, val / max));
-        double percent = pct * 100.0;
-        String style = String.format("-fx-background-color: linear-gradient(to right, #b370ff 0%%, #b370ff %.2f%%, rgba(255,255,255,0.12) %.2f%%, rgba(255,255,255,0.12) 100%%); -fx-background-radius: 50; -fx-pref-height: 6;", percent, percent);
-        track.setStyle(style);
     }
 
     private String formatDuration(Duration d){

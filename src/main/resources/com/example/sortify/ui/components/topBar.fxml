@@ -7,14 +7,14 @@
       spacing="12" alignment="CENTER_LEFT"
       styleClass="topbar">
     <TextField fx:id="searchField"
-               promptText="Search songs, artists, albums..."
+               promptText="Search or find exact title"
+               onAction="#binarySearch"
                styleClass="search-field"/>
     <ChoiceBox fx:id="sortChoice" styleClass="pill-control"/>
     <ChoiceBox fx:id="algoChoice" styleClass="pill-control"/>
     <Button text="Sort" onAction="#sort" styleClass="primary-btn"/>
     <Label fx:id="runtimeLabel" text="Last sort: -" styleClass="muted"/>
     <Pane HBox.hgrow="ALWAYS"/>
-    <TextField fx:id="binaryField" promptText="Binary search title" styleClass="search-field" prefWidth="220"/>
     <Button text="Find" onAction="#binarySearch" styleClass="ghost-btn"/>
     <Button fx:id="undoBtn" text="Undo" onAction="#undo" styleClass="ghost-btn"/>
     <Button fx:id="redoBtn" text="Redo" onAction="#redo" styleClass="ghost-btn"/>

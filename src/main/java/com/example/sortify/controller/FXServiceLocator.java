@@ -9,6 +9,7 @@ import com.example.sortify.repo.LibraryRepository;
 import com.example.sortify.stats.StatsService;
 import com.example.sortify.util.UndoManager;
 import com.example.sortify.util.PlaylistCsvStore;
+import com.example.sortify.util.PlaybackCsvStore;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -34,13 +35,17 @@ public class FXServiceLocator {
     private static LibraryController libraryController;
     private static PlaylistController playlistController;
     private static final Path playlistCsv = Paths.get("playlists.csv");
+    private static final Path playbackCsv = Paths.get(System.getProperty("user.home"), ".sortify", "queue_state.csv");
 
     public static void bootstrap(MainController m){
         main = m;
         try {
-            Path csv = Paths.get(FXServiceLocator.class
-                    .getResource("/com/example/sortify/data/song_list.csv").toURI());
-            library.loadFromCsv(csv);
+            try (var csvStream = FXServiceLocator.class
+                    .getResourceAsStream("/com/example/sortify/data/song_list.csv")) {
+                if (csvStream != null) {
+                    library.loadFromCsv(csvStream);
+                }
+            }
             libraryView.setAll(library.getLibrary());
             Sorts.mergeSort(libraryView, Comparator.comparing(Song::getTitle, String.CASE_INSENSITIVE_ORDER));
 
@@ -65,6 +70,9 @@ public class FXServiceLocator {
             playlists.add(purpleRadio);
             activePlaylist.set(purpleRadio);
         }
+
+        playback.setOnChange(FXServiceLocator::savePlaybackState);
+        loadPlaybackState();
     }
 
     public static void setMainController(MainController m) {
@@ -137,5 +145,22 @@ public class FXServiceLocator {
 
     public static Optional<PlaylistController> playlistController(){
         return Optional.ofNullable(playlistController);
+    }
+
+    private static void loadPlaybackState(){
+        try {
+            var state = PlaybackCsvStore.load(playbackCsv, library.byId());
+            playback.replaceState(state.current(), state.queue(), state.history());
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void savePlaybackState(){
+        try {
+            PlaybackCsvStore.save(playbackCsv, playback);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

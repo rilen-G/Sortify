@@ -8,11 +8,10 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="90" spacing="4" styleClass="player-bar" stylesheets="@../css/app.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="com.example.sortify.controller.PlayerBarController">
+<VBox alignment="CENTER" prefHeight="90" spacing="4" styleClass="player-bar" stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sortify.controller.PlayerBarController">
 
     <VBox alignment="CENTER" spacing="0" styleClass="progress-row">
-        <Slider fx:id="progress" maxWidth="640" minWidth="480" prefWidth="640" styleClass="progress-slider" />
-
+        <Slider fx:id="progress" maxWidth="480" minWidth="480.0" prefHeight="26.0" prefWidth="480" />
         <HBox alignment="CENTER" spacing="4">
             <Label fx:id="currentTimeLabel" styleClass="tiny, time-label" text="0:00" />
             <Label styleClass="tiny, time-label" text="/" />
@@ -24,12 +23,12 @@
 
         <BorderPane pickOnBounds="false">
             <left>
-                <VBox alignment="CENTER_LEFT" spacing="4" translateY="-50" BorderPane.alignment="CENTER_LEFT">
+                <VBox alignment="CENTER_LEFT" spacing="4" translateY="-12" BorderPane.alignment="CENTER_LEFT">
                     <Label fx:id="nowLabel" styleClass="muted" text="Nothing playing" />
                 </VBox>
             </left>
             <right>
-                <HBox alignment="CENTER_RIGHT" spacing="10" translateY="-50" BorderPane.alignment="CENTER_RIGHT">
+                <HBox alignment="CENTER_RIGHT" spacing="10" translateY="-12" BorderPane.alignment="CENTER_RIGHT">
                     <Slider fx:id="vol" max="100" maxWidth="100" />
                 </HBox>
             </right>

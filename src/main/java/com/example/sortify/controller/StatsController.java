@@ -28,7 +28,7 @@ public class StatsController {
             @Override
             protected void updateItem(Song item, boolean empty) {
                 super.updateItem(item, empty);
-                setText(empty || item == null ? "" : item.getTitle() + " — " + item.getArtist());
+                setText(empty || item == null ? "" : item.getTitle() + " - " + item.getArtist());
             }
         });
         refresh();
