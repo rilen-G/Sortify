@@ -187,14 +187,11 @@
     -fx-alignment: center-left;
 }
 
-.chart-bar-chart .axis-label {
-    -fx-text-fill: #FFFFFF;
+pill-list .list-cell:selected {
+    -fx-background-color: rgba(179,112,255,0.25);
+    -fx-text-fill: -text;
 }
 
-.chart-title {
-    -fx-text-fill: #FFFFFF;
-}
-
-.chart-bar-chart .axis-tick-label {
-    -fx-text-fill: #FFFFFF;
+.pill-list .list-cell:selected:hover {
+    -fx-background-color: rgba(179,112,255,0.35);
 }

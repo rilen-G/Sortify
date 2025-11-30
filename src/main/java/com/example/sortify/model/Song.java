@@ -2,17 +2,18 @@ package com.example.sortify.model;
 
 public class Song {
 
-    private String id;
-    private String title;
-    private String artist;
-    private String album;
-    private String genre;
-    private String filePath;
-    private int durationSec;
+    private final String id;
+    private final String title;
+    private final String artist;
+    private final String album;
+    private final String genre;
+    private final String filePath;
+    private final int durationSec;
     private int playCount = 0;
 
     public Song(String id, String title, String artist, String album,
                 String genre, int durationSec, String filePath) {
+
         this.id = id;
         this.title = title;
         this.artist = artist;
@@ -50,7 +51,11 @@ public class Song {
         return filePath;
     }
 
-    public int getPlayCount() {return playCount;}
+    public int getPlayCount() {
+        return playCount;
+    }
 
-    public void incrementPlayCount() { playCount++; }
+    public void incrementPlayCount() {
+        playCount++;
+    }
 }

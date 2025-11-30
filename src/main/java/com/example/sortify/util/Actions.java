@@ -4,6 +4,8 @@ import com.example.sortify.model.Playlist;
 import com.example.sortify.model.Song;
 import com.example.sortify.model.UserAction;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -116,6 +118,45 @@ public final class Actions {
         @Override
         public String label() {
             return "Move track";
+        }
+    }
+
+    public static class DeletePlaylist implements UserAction {
+        private final List<Playlist> playlistsList; // reference to the master list
+        private final Playlist playlist;
+        private final int index;
+        private final Path csvFile;
+
+        public DeletePlaylist(List<Playlist> playlistsList, Playlist playlist, int index, Path csvFile) {
+            this.playlistsList = playlistsList;
+            this.playlist = playlist;
+            this.index = index;
+            this.csvFile = csvFile;
+        }
+
+        @Override
+        public void doIt() {
+            playlistsList.remove(playlist);
+            saveCsv();
+        }
+
+        @Override
+        public void undo() {
+            playlistsList.add(index, playlist);
+            saveCsv();
+        }
+
+        @Override
+        public String label() {
+            return "Delete playlist";
+        }
+
+        private void saveCsv() {
+            try {
+                PlaylistCsvStore.save(csvFile, playlistsList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

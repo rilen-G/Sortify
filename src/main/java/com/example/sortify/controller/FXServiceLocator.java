@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Comparator;
+import java.util.Map;
 import java.util.Optional;
 
 public class FXServiceLocator {
@@ -35,8 +36,9 @@ public class FXServiceLocator {
     private static PlaylistController playlistController;
     private static final Path playlistCsv = Paths.get("playlists.csv");
 
-    public static void bootstrap(MainController m){
+    public static void bootstrap(MainController m) {
         main = m;
+
         try {
             Path csv = Paths.get(FXServiceLocator.class
                     .getResource("/com/example/sortify/data/song_list.csv").toURI());
@@ -44,26 +46,24 @@ public class FXServiceLocator {
             libraryView.setAll(library.getLibrary());
             Sorts.mergeSort(libraryView, Comparator.comparing(Song::getTitle, String.CASE_INSENSITIVE_ORDER));
 
-            // Load playlists from csv if present
-            var loaded = PlaylistCsvStore.load(playlistCsv, library.byId());
-            if (!loaded.isEmpty()){
+            Map<String, Playlist> loaded = PlaylistCsvStore.load(playlistCsv, library.byId());
+
+            if (!loaded.isEmpty()) {
                 playlists.setAll(loaded.values());
                 activePlaylist.set(playlists.get(0));
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-
-        if (playlists.isEmpty()){
-            Playlist purpleRadio = new Playlist("Purple Radio");
-            if (!libraryView.isEmpty()){
+            } else {
+                Playlist purpleRadio = new Playlist("Purple Radio");
                 int pick = Math.min(8, libraryView.size());
-                for (int i = 0; i < pick; i++){
-                    purpleRadio.add(libraryView.get(i));
-                }
+                for (int i = 0; i < pick; i++) purpleRadio.add(libraryView.get(i));
+                playlists.add(purpleRadio);
+                activePlaylist.set(purpleRadio);
+
+                // Save default playlist to the same path
+                savePlaylists();
             }
-            playlists.add(purpleRadio);
-            activePlaylist.set(purpleRadio);
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

@@ -25,11 +25,16 @@ public class PlaylistCsvStore {
             bw.write(HEADER);
             bw.newLine();
             for (Playlist pl : playlists) {
-                for (Song s : pl.tracks()) {
-                    bw.write(escape(pl.getName()));
-                    bw.write(",");
-                    bw.write(escape(s.getId()));
+                if (pl.tracks().isEmpty()) {
+                    bw.write(escape(pl.getName()) + ",");
                     bw.newLine();
+                } else {
+                    for (Song s : pl.tracks()) {
+                        bw.write(escape(pl.getName()));
+                        bw.write(",");
+                        bw.write(escape(s.getId()));
+                        bw.newLine();
+                    }
                 }
             }
         }
@@ -42,13 +47,15 @@ public class PlaylistCsvStore {
             String line = br.readLine(); // skip header
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split(",", -1);
-                if (parts.length < 2) continue;
+                if (parts.length == 0) continue;
                 String plName = unescape(parts[0]);
-                String songId = unescape(parts[1]);
-                Song s = library.get(songId);
-                if (s == null) continue;
                 Playlist pl = byName.computeIfAbsent(plName, Playlist::new);
-                pl.add(s);
+
+                if (parts.length > 1) {
+                    String songId = unescape(parts[1]);
+                    Song s = library.get(songId);
+                    if (s != null) pl.add(s);
+                }
             }
         }
         return byName;
