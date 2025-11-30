@@ -53,4 +53,6 @@ public class Song {
     public int getPlayCount() {return playCount;}
 
     public void incrementPlayCount() { playCount++; }
+
+    public void setPlayCount(int count) { playCount = Math.max(0, count); }
 }

@@ -11,12 +11,20 @@ public class PlaybackController {
     private Runnable onChange;
 
     public void enqueue(Song s){
+        if (s == null || isInQueue(s)) return;
         queue.offer(s);
         changed();
     }
 
     public void enqueueAll(Collection<Song> songs){
-        queue.addAll(songs);
+        if (songs == null) return;
+        boolean added = false;
+        for (Song s : songs){
+            if (s == null || isInQueue(s)) continue;
+            queue.offer(s);
+            added = true;
+        }
+        if (!added) return;
         changed();
     }
 
@@ -64,6 +72,12 @@ public class PlaybackController {
     public Song current(){ return nowPlaying; }
     public Queue<Song> getQueue(){ return queue; }
     public Stack<Song> getHistory(){ return history; }
+
+    private boolean isInQueue(Song s){
+        if (s == null) return false;
+        String id = s.getId();
+        return queue.stream().anyMatch(song -> Objects.equals(song.getId(), id));
+    }
 
     private void changed(){
         if (onChange != null){

@@ -6,7 +6,7 @@
       fx:controller="com.example.sortify.controller.SideBarController"
       spacing="20" alignment="TOP_LEFT"
       styleClass="sidebar">
-    <Label text="Sortify" styleClass="brand"/>
+    <Label text="Sortify" styleClass="view-title"/>
 
     <VBox spacing="10" styleClass="nav-group">
         <Button text="⌂   Library" onAction="#goLibrary" styleClass="nav-btn"/>
@@ -15,7 +15,7 @@
         <Button text="★   Insights" onAction="#goStats" styleClass="nav-btn"/>
     </VBox>
 
-    <Label text="Playlists" styleClass="section-title"/>
+    <Label text="Playlists" styleClass="view-title"/>
     <ListView fx:id="playlistsList" styleClass="pill-list"/>
 
     <HBox spacing="8">

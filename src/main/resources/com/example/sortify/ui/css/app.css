@@ -29,12 +29,12 @@
     -fx-border-color: rgba(255,255,255,0.06);
 }
 
-.brand {
+/*.brand {
     -fx-text-fill: -text;
     -fx-font-size: 26px;
     -fx-font-weight: 800;
     -fx-effect: dropshadow(gaussian, rgba(179,112,255,0.45), 12, 0.4, 0, 0);
-}
+}*/
 
 .nav-btn, .ghost-btn, .primary-btn {
     -fx-pref-height: 40;
@@ -152,6 +152,7 @@
     -fx-background-color: rgba(179,112,255,0.18);
 }
 
+
 .progress-row {
     -fx-padding: 4 18 8 18;
 }
@@ -191,13 +192,37 @@
 }
 
 .chart-bar-chart .axis-label {
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: white;
 }
 
 .chart-title {
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: white;
 }
 
 .chart-bar-chart .axis-tick-label {
-    -fx-text-fill: #FFFFFF;
+    -fx-text-fill: white;
 }
+
+.chart-bar {
+    -fx-bar-fill: #8025C2;
+}
+
+.chart-pie { }
+.default-color0.chart-pie { -fx-pie-color: #ff4d4f; }
+.default-color1.chart-pie { -fx-pie-color: #ff9f1c; }
+.default-color2.chart-pie { -fx-pie-color: #ffd60a; }
+.default-color3.chart-pie { -fx-pie-color: #7AFFFD; }
+.default-color4.chart-pie { -fx-pie-color: #3DFA20; }
+.default-color5.chart-pie { -fx-pie-color: #1e90ff; }
+.default-color6.chart-pie { -fx-pie-color: #FF63CD; }
+.default-color7.chart-pie { -fx-pie-color: #d81159; }
+
+.chart-legend {
+    -fx-background-color: transparent;
+    -fx-text-fill: -text;
+}
+
+.chart-legend-item {
+    -fx-text-fill: -text;
+}
+

@@ -16,6 +16,7 @@ public class ForYouController {
     @FXML private TableView<Song> suggested;
     @FXML private TableColumn<Song, String> colTitle;
     @FXML private TableColumn<Song, String> colArtist;
+    @FXML private TableColumn<Song, String> colAlbum;
 
     @FXML
     public void initialize(){
@@ -25,6 +26,8 @@ public class ForYouController {
                 new SimpleStringProperty(cell.getValue().getTitle()));
         colArtist.setCellValueFactory(cell ->
                 new SimpleStringProperty(cell.getValue().getArtist()));
+        colAlbum.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getAlbum()));
     }
 
     @FXML

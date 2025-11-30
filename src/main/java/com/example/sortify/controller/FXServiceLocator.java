@@ -10,6 +10,7 @@ import com.example.sortify.stats.StatsService;
 import com.example.sortify.util.UndoManager;
 import com.example.sortify.util.PlaylistCsvStore;
 import com.example.sortify.util.PlaybackCsvStore;
+import com.example.sortify.util.StatsCsvStore;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -36,6 +37,7 @@ public class FXServiceLocator {
     private static PlaylistController playlistController;
     private static final Path playlistCsv = Paths.get("playlists.csv");
     private static final Path playbackCsv = Paths.get(System.getProperty("user.home"), ".sortify", "queue_state.csv");
+    private static final Path statsCsv = Paths.get(System.getProperty("user.home"), ".sortify", "play_counts.csv");
 
     public static void bootstrap(MainController m){
         main = m;
@@ -48,6 +50,7 @@ public class FXServiceLocator {
             }
             libraryView.setAll(library.getLibrary());
             Sorts.mergeSort(libraryView, Comparator.comparing(Song::getTitle, String.CASE_INSENSITIVE_ORDER));
+            loadStats();
 
             // Load playlists from csv if present
             var loaded = PlaylistCsvStore.load(playlistCsv, library.byId());
@@ -60,7 +63,7 @@ public class FXServiceLocator {
         }
 
         if (playlists.isEmpty()){
-            Playlist purpleRadio = new Playlist("Purple Radio");
+            Playlist purpleRadio = new Playlist("Test Playlist");
             if (!libraryView.isEmpty()){
                 int pick = Math.min(8, libraryView.size());
                 for (int i = 0; i < pick; i++){
@@ -159,6 +162,28 @@ public class FXServiceLocator {
     public static void savePlaybackState(){
         try {
             PlaybackCsvStore.save(playbackCsv, playback);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    private static void loadStats(){
+        try {
+            var counts = StatsCsvStore.load(statsCsv);
+            if (!counts.isEmpty()){
+                library.getLibrary().forEach(song -> {
+                    Integer c = counts.get(song.getId());
+                    if (c != null) song.setPlayCount(c);
+                });
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public static void saveStats(){
+        try {
+            StatsCsvStore.save(statsCsv, library.getLibrary());
         } catch (Exception e){
             e.printStackTrace();
         }

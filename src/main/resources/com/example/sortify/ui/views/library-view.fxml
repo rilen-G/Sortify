@@ -7,7 +7,6 @@
       spacing="16" styleClass="view">
     <HBox alignment="CENTER_LEFT" spacing="12">
         <Label text="Library" styleClass="view-title"/>
-        <Label text="Sorted and ready" styleClass="muted"/>
     </HBox>
 
     <TableView fx:id="table" styleClass="glass">

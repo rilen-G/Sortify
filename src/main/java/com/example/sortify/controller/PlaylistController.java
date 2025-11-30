@@ -19,6 +19,7 @@ public class PlaylistController {
     @FXML private TableView<Song> trackList;
     @FXML private TableColumn<Song, String> colTitle;
     @FXML private TableColumn<Song, String> colArtist;
+    @FXML private TableColumn<Song, String> colAlbum;
 
     private final ObservableList<Song> currentTracks = FXCollections.observableArrayList();
 
@@ -32,6 +33,8 @@ public class PlaylistController {
                 new SimpleStringProperty(cell.getValue().getTitle()));
         colArtist.setCellValueFactory(cell ->
                 new SimpleStringProperty(cell.getValue().getArtist()));
+        colAlbum.setCellValueFactory(cell ->
+                new SimpleStringProperty(cell.getValue().getAlbum()));
 
         FXServiceLocator.activePlaylistProperty().addListener((obs, old, pl) -> loadPlaylist(pl));
         loadPlaylist(FXServiceLocator.activePlaylist());

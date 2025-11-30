@@ -19,16 +19,18 @@
     </HBox>
 
     <HBox spacing="16">
-        <BarChart fx:id="topPlays" prefHeight="320" title="Top Played" VBox.vgrow="ALWAYS">
+        <BarChart fx:id="topPlays" prefHeight="320" title="Top Played" VBox.vgrow="ALWAYS"
+                  legendVisible="false">
             <xAxis>
-                <CategoryAxis fx:id="topAxis" />
+                <CategoryAxis fx:id="topAxis" label="Song Title"/>
             </xAxis>
             <yAxis>
-                <NumberAxis label="Plays" />
+                <NumberAxis fx:id="topYAxis" label="Plays"/>
             </yAxis>
         </BarChart>
 
-        <PieChart fx:id="genrePie" prefWidth="360" title="Genres" />
+        <PieChart fx:id="genrePie" prefWidth="440" prefHeight="360"
+                  legendSide="RIGHT" title="Genres" />
     </HBox>
 
     <VBox spacing="8">

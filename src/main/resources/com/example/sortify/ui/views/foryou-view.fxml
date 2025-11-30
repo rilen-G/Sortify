@@ -19,6 +19,7 @@
         <columns>
             <TableColumn fx:id="colTitle" text="Title" prefWidth="300"/>
             <TableColumn fx:id="colArtist" text="Artist" prefWidth="250"/>
+            <TableColumn fx:id="colAlbum" text="Album" prefWidth="240"/>
         </columns>
     </TableView>
 </VBox>

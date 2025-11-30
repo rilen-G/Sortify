@@ -79,6 +79,7 @@ public class PlayerBarController {
         if (song.isPresent()){
             playSong(song.get());
         } else {
+            FXServiceLocator.audio().stop();
             nowLabel.setText("Queue empty");
             currentTimeLabel.setText("0:00");
             totalTimeLabel.setText("0:00");
@@ -86,6 +87,7 @@ public class PlayerBarController {
             playing = false;
             progress.setDisable(true);
             progress.setValue(0);
+            attachPlayer(null);
         }
     }
 
@@ -94,6 +96,7 @@ public class PlayerBarController {
         playPauseBtn.setText("Pause");
         playing = true;
         s.incrementPlayCount();
+        FXServiceLocator.saveStats();
         FXServiceLocator.audio().play(s, () -> Platform.runLater(this::next));
         attachPlayer(FXServiceLocator.audio().getPlayer());
     }
