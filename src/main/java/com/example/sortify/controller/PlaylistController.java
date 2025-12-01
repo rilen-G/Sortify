@@ -6,10 +6,12 @@ import com.example.sortify.util.Actions;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -22,12 +24,14 @@ public class PlaylistController {
     @FXML private TableColumn<Song, String> colAlbum;
 
     private final ObservableList<Song> currentTracks = FXCollections.observableArrayList();
+    private FilteredList<Song> filteredTracks;
 
     @FXML
     public void initialize() {
         FXServiceLocator.registerPlaylistController(this);
         trackList.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-        trackList.setItems(currentTracks);
+        filteredTracks = new FilteredList<>(currentTracks, s -> true);
+        trackList.setItems(filteredTracks);
 
         colTitle.setCellValueFactory(cell ->
                 new SimpleStringProperty(cell.getValue().getTitle()));
@@ -43,7 +47,9 @@ public class PlaylistController {
     @FXML private void playAll() {
         Playlist pl = FXServiceLocator.activePlaylist();
         if (pl == null || pl.tracks().isEmpty()) return;
-        FXServiceLocator.playback().resetQueue(pl.tracks());
+        Optional<Song> first = FXServiceLocator.playback().startPlaylistLoop(pl);
+        first.ifPresent(song -> FXServiceLocator.playerBarController()
+                .ifPresent(bar -> bar.playSong(song)));
     }
 
     @FXML private void remove() {
@@ -84,18 +90,38 @@ public class PlaylistController {
         loadPlaylist(FXServiceLocator.activePlaylist());
     }
 
+    public void applySearch(String query){
+        if (filteredTracks == null) return;
+        String q = query == null ? "" : query.toLowerCase(Locale.ROOT).trim();
+        filteredTracks.setPredicate(song -> {
+            if (q.isBlank()) return true;
+            return song.getTitle().toLowerCase(Locale.ROOT).contains(q)
+                    || song.getArtist().toLowerCase(Locale.ROOT).contains(q)
+                    || song.getAlbum().toLowerCase(Locale.ROOT).contains(q);
+        });
+    }
+
+    public void selectSong(Song song){
+        if (song == null) return;
+        int idx = trackList.getItems().indexOf(song);
+        if (idx < 0) return;
+        trackList.getSelectionModel().clearSelection();
+        trackList.getSelectionModel().select(idx);
+        trackList.scrollTo(idx);
+    }
+
     private void moveSelected(int delta){
         Playlist pl = FXServiceLocator.activePlaylist();
         if (pl == null) return;
-        int idx = trackList.getSelectionModel().getSelectedIndex();
+        Song selected = trackList.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+        int idx = pl.tracks().indexOf(selected);
         if (idx < 0) return;
         int target = idx + delta;
         if (target < 0 || target >= pl.tracks().size()) return;
-        Song s = currentTracks.get(idx);
-        FXServiceLocator.undo().execute(new Actions.MoveInPlaylist(pl, s, idx, target));
+        FXServiceLocator.undo().execute(new Actions.MoveInPlaylist(pl, selected, idx, target));
         refresh();
-        trackList.getSelectionModel().select(target);
-        trackList.scrollTo(target);
+        selectSong(selected);
         FXServiceLocator.savePlaylists();
     }
 
@@ -106,12 +132,12 @@ public class PlaylistController {
     }
 
     private void loadPlaylist(Playlist pl){
-        currentTracks.clear();
         if (pl == null) {
             plTitle.setText("No playlist");
+            currentTracks.clear();
             return;
         }
         plTitle.setText(pl.getName());
-        currentTracks.addAll(pl.tracks());
+        currentTracks.setAll(pl.tracks());
     }
 }

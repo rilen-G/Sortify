@@ -1,6 +1,7 @@
 package com.example.sortify.controller;
 
 import com.example.sortify.model.Song;
+import com.example.sortify.controller.FXServiceLocator;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
@@ -43,6 +44,13 @@ public class StatsController {
         loadTopPlayed();
         loadGenres();
         loadRecent();
+    }
+
+    @FXML
+    private void resetStats() {
+        FXServiceLocator.library().getLibrary().forEach(song -> song.setPlayCount(0));
+        FXServiceLocator.saveStats();
+        refresh();
     }
 
     private void loadTopPlayed(){
@@ -123,10 +131,12 @@ public class StatsController {
     }
 
     private void loadRecent(){
-        List<Song> history = FXServiceLocator.playback().getHistory().stream()
-                .limit(10)
-                .collect(Collectors.toList());
-        recentList.getItems().setAll(history);
+        var historyStack = FXServiceLocator.playback().getHistory();
+        List<Song> latestFirst = new ArrayList<>();
+        for (int i = historyStack.size() - 1; i >= 0 && latestFirst.size() < 10; i--){
+            latestFirst.add(historyStack.get(i));
+        }
+        recentList.getItems().setAll(latestFirst);
     }
 
     private String titleCase(String value){

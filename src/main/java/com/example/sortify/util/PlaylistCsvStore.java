@@ -8,7 +8,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +36,7 @@ public class PlaylistCsvStore {
     }
 
     public static Map<String, Playlist> load(Path file, Map<String, Song> library) throws IOException {
-        Map<String, Playlist> byName = new HashMap<>();
+        Map<String, Playlist> byName = new LinkedHashMap<>();
         if (!Files.exists(file)) return byName;
         try (BufferedReader br = Files.newBufferedReader(file)) {
             String line = br.readLine(); // skip header
@@ -64,4 +64,3 @@ public class PlaylistCsvStore {
         return v.replace(";", ",");
     }
 }
-

@@ -1,55 +1,148 @@
 id,title,artist,album,genre,durationSecs,filePath
-001,Nomad,Clairo,Charm,Soft rock / jazz / psychedelic folk / soul,03:45,nomad.mp3
-002,Sexy to Someone,Clairo,Charm,Soft rock / jazz / psychedelic folk / soul,03:27,sexy_to_someone.mp3
-003,Second Nature,Clairo,Charm,Soft rock / jazz / psychedelic folk / soul,03:47,second_nature.mp3
-004,Slow Dance,Clairo,Charm,Soft rock / jazz / psychedelic folk / soul,03:54,slow_dance.mp3
-005,Thank You,Clairo,Charm,Soft rock / jazz / psychedelic folk / soul,03:25,thank_you.mp3
-006,Terrapin,Clairo,Charm,Soft rock / jazz / psychedelic folk / soul,03:01,terrapin.mp3
-007,Juna,Clairo,Charm,Soft rock / jazz / psychedelic folk / soul,03:15,juna.mp3
-008,Add Up My Love,Clairo,Charm,Soft rock / jazz / psychedelic folk / soul,03:25,add_up_my_love.mp3
-009,Echo,Clairo,Charm,Soft rock / jazz / psychedelic folk / soul,03:49,echo.mp3
-010,Glory of the Snow,Clairo,Charm,Soft rock / jazz / psychedelic folk / soul,02:50,glory_of_the_snow.mp3
-011,Pier 4,Clairo,Charm,Soft rock / jazz / psychedelic folk / soul,03:25,pier_4.mp3
-012,Alewife,Clairo,Immunity,Soft rock / bedroom pop / electropop,03:32,alewife.mp3
-013,Impossible,Clairo,Immunity,Soft rock / bedroom pop / electropop,03:50,impossible.mp3
-014,Closer to You,Clairo,Immunity,Soft rock / bedroom pop / electropop,03:04,closer_to_you.mp3
-015,North,Clairo,Immunity,Soft rock / bedroom pop / electropop,03:33,north.mp3
-016,Bags,Clairo,Immunity,Soft rock / bedroom pop / electropop,04:20,bags.mp3
-017,Softly,Clairo,Immunity,Soft rock / bedroom pop / electropop,03:05,softly.mp3
-018,Sofia,Clairo,Immunity,Soft rock / bedroom pop / electropop,03:08,sofia.mp3
-019,White Flag,Clairo,Immunity,Soft rock / bedroom pop / electropop,03:01,white_flag.mp3
-020,Feel Something,Clairo,Immunity,Soft rock / bedroom pop / electropop,02:57,feel_something.mp3
-021,Sinking,Clairo,Immunity,Soft rock / bedroom pop / electropop,03:10,sinking.mp3
-022,I Wouldn’t Ask You,Clairo,Immunity,Soft rock / bedroom pop / electropop,06:56,i_wouldnt_ask_you.mp3
-023,Foreword,Linkin Park,Meteora,Nu metal / alternative rock / rap rock,00:13,foreword.mp3
-024,Don't Stay,Linkin Park,Meteora,Nu metal / alternative rock / rap rock,03:08,dont_stay.mp3
-025,Somewhere I Belong,Linkin Park,Meteora,Nu metal / alternative rock / rap rock,03:34,somewhere_i_belong.mp3
-026,Lying From You,Linkin Park,Meteora,Nu metal / alternative rock / rap rock,02:55,lying_from_you.mp3
-027,Hit The Floor,Linkin Park,Meteora,Nu metal / alternative rock / rap rock,02:44,hit_the_floor.mp3
-028,Easier to Run,Linkin Park,Meteora,Nu metal / alternative rock / rap rock,03:24,easier_to_run.mp3
-029,Faint,Linkin Park,Meteora,Nu metal / alternative rock / rap rock,02:42,faint.mp3
-030,Figure.09,Linkin Park,Meteora,Nu metal / alternative rock / rap rock,03:17,figure.09.mp3
-031,Breaking the Habit,Linkin Park,Meteora,Nu metal / alternative rock / rap rock,03:16,breaking_the_habit.mp3
-032,From the Inside,Linkin Park,Meteora,Nu metal / alternative rock / rap rock,02:55,from_the_inside.mp3
-033,Nobody's Listening,Linkin Park,Meteora,Nu metal / alternative rock / rap rock,02:58,nobodys_listening.mp3
-034,Session,Linkin Park,Meteora,Nu metal / alternative rock / rap rock,02:24,session.mp3
-035,Numb,Linkin Park,Meteora,Nu metal / alternative rock / rap rock,03:06,numb.mp3
-036,She Won't Go Away,Faye Webster,Faye Webster,Indie folk / alt-folk / soft rock,03:05,she_wont_go_away.mp3
-037,I Know You,Faye Webster,Faye Webster,Indie folk / alt-folk / soft rock,04:11,i_know_you.mp3
-038,Is It Too Much to Ask,Faye Webster,Faye Webster,Indie folk / alt-folk / soft rock,03:10,is_it_too_much_to_ask.mp3
-039,Alone Again,Faye Webster,Faye Webster,Indie folk / alt-folk / soft rock,02:32,alone_again.mp3
-040,It Doesn't Work Like That,Faye Webster,Faye Webster,Indie folk / alt-folk / soft rock,03:00,it_doesnt_work_like_that.mp3
-041,Remember When,Faye Webster,Faye Webster,Indie folk / alt-folk / soft rock,02:54,remember_when.mp3
-042,It's Not a Sad Thing,Faye Webster,Faye Webster,Indie folk / alt-folk / soft rock,02:06,its_not_a_sad_thing.mp3
-043,Say It Now,Faye Webster,Faye Webster,Indie folk / alt-folk / soft rock,03:51,say_it_now.mp3
-044,Wrong People,Faye Webster,Faye Webster,Indie folk / alt-folk / soft rock,03:30,wrong_people.mp3
-045,What's the Point?,Faye Webster,Faye Webster,Indie folk / alt-folk / soft rock,04:01,whats_the_point.mp3
-046,Sienna,The Marías,Submarine,Dream pop / Indie pop,03:44,sienna.mp3
-047,Paranoia,The Marías,Submarine,Indie pop,03:51,paranoia.mp3
-048,Back to Me,The Marías,Back to Me,Indie pop / Dream pop,03:34,back_to_me.mp3
-049,L.E.S.,Childish Gambino,Camp,Hip hop,05:17,les.mp3
-050,Heartbeat,Childish Gambino,Camp,Hip hop,04:31,heartbeat.mp3
-
-
-
-
+001,Nomad,Clairo,Charm,soft rock / jazz / psychedelic folk / soul,03:45,nomad.mp3
+002,Sexy to Someone,Clairo,Charm,soft rock / jazz / psychedelic folk / soul,03:27,sexy_to_someone.mp3
+003,Second Nature,Clairo,Charm,soft rock / jazz / psychedelic folk / soul,03:47,second_nature.mp3
+004,Slow Dance,Clairo,Charm,soft rock / jazz / psychedelic folk / soul,03:54,slow_dance.mp3
+005,Thank You,Clairo,Charm,soft rock / jazz / psychedelic folk / soul,03:25,thank_you.mp3
+006,Terrapin,Clairo,Charm,soft rock / jazz / psychedelic folk / soul,03:01,terrapin.mp3
+007,Juna,Clairo,Charm,soft rock / jazz / psychedelic folk / soul,03:15,juna.mp3
+008,Add Up My Love,Clairo,Charm,soft rock / jazz / psychedelic folk / soul,03:25,add_up_my_love.mp3
+009,Echo,Clairo,Charm,soft rock / jazz / psychedelic folk / soul,03:49,echo.mp3
+010,Glory of the Snow,Clairo,Charm,soft rock / jazz / psychedelic folk / soul,02:50,glory_of_the_snow.mp3
+011,Pier 4,Clairo,Charm,soft rock / jazz / psychedelic folk / soul,03:25,pier_4.mp3
+012,Alewife,Clairo,Immunity,soft rock / bedroom pop / electropop,03:32,alewife.mp3
+013,Impossible,Clairo,Immunity,soft rock / bedroom pop / electropop,03:50,impossible.mp3
+014,Closer to You,Clairo,Immunity,soft rock / bedroom pop / electropop,03:04,closer_to_you.mp3
+015,North,Clairo,Immunity,soft rock / bedroom pop / electropop,03:33,north.mp3
+016,Bags,Clairo,Immunity,soft rock / bedroom pop / electropop,04:20,bags.mp3
+017,Softly,Clairo,Immunity,soft rock / bedroom pop / electropop,03:05,softly.mp3
+018,Sofia,Clairo,Immunity,soft rock / bedroom pop / electropop,03:08,sofia.mp3
+019,White Flag,Clairo,Immunity,soft rock / bedroom pop / electropop,03:01,white_flag.mp3
+020,Feel Something,Clairo,Immunity,soft rock / bedroom pop / electropop,02:57,feel_something.mp3
+021,Sinking,Clairo,Immunity,soft rock / bedroom pop / electropop,03:10,sinking.mp3
+022,I Wouldn't Ask You,Clairo,Immunity,soft rock / bedroom pop / electropop,06:56,i_wouldnt_ask_you.mp3
+023,Foreword,Linkin Park,Meteora,nu metal / alternative rock / rap rock,00:13,foreword.mp3
+024,Don't Stay,Linkin Park,Meteora,nu metal / alternative rock / rap rock,03:08,dont_stay.mp3
+025,Somewhere I Belong,Linkin Park,Meteora,nu metal / alternative rock / rap rock,03:34,somewhere_i_belong.mp3
+026,Lying From You,Linkin Park,Meteora,nu metal / alternative rock / rap rock,02:55,lying_from_you.mp3
+027,Hit The Floor,Linkin Park,Meteora,nu metal / alternative rock / rap rock,02:44,hit_the_floor.mp3
+028,Easier to Run,Linkin Park,Meteora,nu metal / alternative rock / rap rock,03:24,easier_to_run.mp3
+029,Faint,Linkin Park,Meteora,nu metal / alternative rock / rap rock,02:42,faint.mp3
+030,Figure.09,Linkin Park,Meteora,nu metal / alternative rock / rap rock,03:17,figure_09.mp3
+031,Breaking the Habit,Linkin Park,Meteora,nu metal / alternative rock / rap rock,03:16,breaking_the_habit.mp3
+032,From the Inside,Linkin Park,Meteora,nu metal / alternative rock / rap rock,02:55,from_the_inside.mp3
+033,Nobody's Listening,Linkin Park,Meteora,nu metal / alternative rock / rap rock,02:58,nobodys_listening.mp3
+034,Session,Linkin Park,Meteora,nu metal / alternative rock / rap rock,02:24,session.mp3
+035,Numb,Linkin Park,Meteora,nu metal / alternative rock / rap rock,03:06,numb.mp3
+036,She Won't Go Away,Faye Webster,Faye Webster,indie folk / alt-folk / soft rock,03:05,she_wont_go_away.mp3
+037,I Know You,Faye Webster,Faye Webster,indie folk / alt-folk / soft rock,04:11,i_know_you.mp3
+038,Is It Too Much to Ask,Faye Webster,Faye Webster,indie folk / alt-folk / soft rock,03:10,is_it_too_much_to_ask.mp3
+039,Alone Again,Faye Webster,Faye Webster,indie folk / alt-folk / soft rock,02:32,alone_again.mp3
+040,It Doesn't Work Like That,Faye Webster,Faye Webster,indie folk / alt-folk / soft rock,03:00,it_doesnt_work_like_that.mp3
+041,Remember When,Faye Webster,Faye Webster,indie folk / alt-folk / soft rock,02:54,remember_when.mp3
+042,It's Not a Sad Thing,Faye Webster,Faye Webster,indie folk / alt-folk / soft rock,02:06,its_not_a_sad_thing.mp3
+043,Say It Now,Faye Webster,Faye Webster,indie folk / alt-folk / soft rock,03:51,say_it_now.mp3
+044,Wrong People,Faye Webster,Faye Webster,indie folk / alt-folk / soft rock,03:30,wrong_people.mp3
+045,What's the Point?,Faye Webster,Faye Webster,indie folk / alt-folk / soft rock,04:01,whats_the_point.mp3
+046,Sienna,The Marías,Submarine,dream pop / indie pop,03:44,sienna.mp3
+047,Paranoia,The Marías,Submarine,indie pop,03:51,paranoia.mp3
+048,Back to Me,The Marías,Back to Me,indie pop / dream pop,03:34,back_to_me.mp3
+049,L.E.S.,Childish Gambino,Camp,hip hop,05:17,les.mp3
+050,Heartbeat,Childish Gambino,Camp,hip hop,04:31,heartbeat.mp3
+051,Doomed,Bring Me The Horizon,That's the Spirit,alternative rock / electronic rock / pop rock,04:34,doomed.mp3
+052,Happy Song,Bring Me The Horizon,That's the Spirit,alternative rock / electronic rock / pop rock,03:59,happy_song.mp3
+053,Throne,Bring Me The Horizon,That's the Spirit,alternative rock / electronic rock / pop rock,03:11,throne.mp3
+054,True Friends,Bring Me The Horizon,That's the Spirit,alternative rock / electronic rock / pop rock,03:52,true_friends.mp3
+055,Follow You,Bring Me The Horizon,That's the Spirit,alternative rock / electronic rock / pop rock,03:51,follow_you.mp3
+056,What You Need,Bring Me The Horizon,That's the Spirit,alternative rock / electronic rock / pop rock,04:12,what_you_need.mp3
+057,Avalanche,Bring Me The Horizon,That's the Spirit,alternative rock / electronic rock / pop rock,04:22,avalanche.mp3
+058,Run,Bring Me The Horizon,That's the Spirit,alternative rock / electronic rock / pop rock,03:42,run.mp3
+059,Drown,Bring Me The Horizon,That's the Spirit,alternative rock / electronic rock / pop rock,03:41,drown.mp3
+060,Blasphemy,Bring Me The Horizon,That's the Spirit,alternative rock / electronic rock / pop rock,04:35,blasphemy.mp3
+061,Oh No,Bring Me The Horizon,That's the Spirit,alternative rock / electronic rock / pop rock,05:01,oh_no.mp3
+062,i apologise if you feel something,Bring Me The Horizon,Amo,electronic pop / pop rock / ambient pop,02:19,i_apologise_if_you_feel_something.mp3
+063,MANTRA,Bring Me The Horizon,Amo,electronic pop / pop rock / ambient pop,03:53,mantra.mp3
+064,nihilist blues,Bring Me The Horizon,Amo,electronic pop / pop rock / ambient pop,05:25,nihilist_blues.mp3
+065,in the dark,Bring Me The Horizon,Amo,electronic pop / pop rock / ambient pop,04:31,in_the_dark.mp3
+066,wonderful life,Bring Me The Horizon,Amo,electronic pop / pop rock / ambient pop,04:34,wonderful_life.mp3
+067,ouch,Bring Me The Horizon,Amo,electronic pop / pop rock / ambient pop,01:49,ouch.mp3
+068,medicine,Bring Me The Horizon,Amo,electronic pop / pop rock / ambient pop,03:47,medicine.mp3
+069,sugar honey ice & tea,Bring Me The Horizon,Amo,electronic pop / pop rock / ambient pop,04:21,sugar_honey_ice_&_tea.mp3
+070,why you gotta kick me when i'm down?,Bring Me The Horizon,Amo,electronic pop / pop rock / ambient pop,04:28,why_you_gotta_kick_me_when_im_down.mp3
+071,fresh bruises,Bring Me The Horizon,Amo,electronic pop / pop rock / ambient pop,03:18,fresh_bruises.mp3
+072,mother tongue,Bring Me The Horizon,Amo,electronic pop / pop rock / ambient pop,03:37,mother_tongue.mp3
+073,heavy metal,Bring Me The Horizon,Amo,electronic pop / pop rock / ambient pop,04:00,heavy_metal.mp3
+074,i don't know what to say,Bring Me The Horizon,Amo,electronic pop / pop rock / ambient pop,05:52,i_dont_know_what_to_say.mp3
+075,D.O.G.,Vicente Void,Murder,horrorcore / industrial hip hop / experimental rap,01:31,dog.mp3
+076,$lime,Vicente Void,Murder,horrorcore / industrial hip hop / experimental rap,02:53,slime.mp3
+077,Mud,Vicente Void,Murder,horrorcore / industrial hip hop / experimental rap,01:57,mud.mp3
+078,Necktie,Vicente Void,Murder,horrorcore / industrial hip hop / experimental rap,03:04,necktie.mp3
+079,no1 knows,Vicente Void,Murder,horrorcore / industrial hip hop / experimental rap,03:48,no1_knows.mp3
+080,Grief,Vicente Void,Murder,horrorcore / industrial hip hop / experimental rap,04:02,grief.mp3
+081,Common Ground,Vicente Void,Murder,horrorcore / industrial hip hop / experimental rap,03:13,common_ground.mp3
+082,Young and Aspiring,Underoath,They're Only Chasing Safety,post-hardcore / screamo / emo,03:04,young_and_aspiring.mp3
+083,A Boy Brushed Red Living in Black and White,Underoath,They're Only Chasing Safety,post-hardcore / screamo / emo,04:28,a_boy_brushed_red_living_in_black_and_white.mp3
+084,The Impact of Reason,Underoath,They're Only Chasing Safety,post-hardcore / screamo / emo,03:23,the_impact_of_reason.mp3
+085,Reinventing Your Exit,Underoath,They're Only Chasing Safety,post-hardcore / screamo / emo,04:22,reinventing_your_exit.mp3
+086,The Blue Note (instrumental),Underoath,They're Only Chasing Safety,post-hardcore / screamo / emo,00:51,the_blue_note_instrumental.mp3
+087,It's Dangerous Business Walking Out Your Front Door,Underoath,They're Only Chasing Safety,post-hardcore / screamo / emo,03:58,its_dangerous_business_walking_out_your_front_door.mp3
+088,Down Set Go,Underoath,They're Only Chasing Safety,post-hardcore / screamo / emo,03:44,down_set_go.mp3
+089,I Don't Feel Very Receptive Today,Underoath,They're Only Chasing Safety,post-hardcore / screamo / emo,03:42,i_dont_feel_very_receptive_today.mp3
+090,I'm Content with Losing,Underoath,They're Only Chasing Safety,post-hardcore / screamo / emo,03:55,im_content_with_losing.mp3
+091,Some Will Seek Forgiveness Others Escape,Underoath,They're Only Chasing Safety,post-hardcore / screamo / emo,04:21,some_will_seek_forgiveness_others_escape.mp3
+092,Seven Years,Saosin,Translating the Name,post-hardcore / screamo / progressive emo,03:12,seven_years.mp3
+093,Translating the Name,Saosin,Translating the Name,post-hardcore / screamo / progressive emo,03:26,translating_the_name.mp3
+094,3rd Measurement In C,Saosin,Translating the Name,post-hardcore / screamo / progressive emo,02:38,3rd_measurement_in_c.mp3
+095,Lost Symphonies,Saosin,Translating the Name,post-hardcore / screamo / progressive emo,02:55,lost_symphonies.mp3
+096,They Perched On Their Stilts Pointing and Daring Me To Break Custom,Saosin,Translating the Name,post-hardcore / screamo / progressive emo,02:51,they_perched_on_their_stilts_pointing_and_daring_me_to_break_custom.mp3
+097,fleahouse,Static Dress,Rouge Carpet Disaster,post-hardcore / emo / metalcore,03:03,fleahouse.mp3
+098,sweet.,Static Dress,Rouge Carpet Disaster,post-hardcore / emo / metalcore,03:36,sweet.mp3
+099,Push rope,Static Dress,Rouge Carpet Disaster,post-hardcore / emo / metalcore,03:06,push_rope.mp3
+100,Attempt 8,Static Dress,Rouge Carpet Disaster,post-hardcore / emo / metalcore,02:33,attempt_8.mp3
+101,Courtney just relax,Static Dress,Rouge Carpet Disaster,post-hardcore / emo / metalcore,02:55,courtney_just_relax.mp3
+102,Di-sinTer,Static Dress,Rouge Carpet Disaster,post-hardcore / emo / metalcore,03:26,di_sinter.mp3
+103,such.a.shame,Static Dress,Rouge Carpet Disaster,post-hardcore / emo / metalcore,03:19,such_a_shame.mp3
+104,...Maybe!!?,Static Dress,Rouge Carpet Disaster,post-hardcore / emo / metalcore,03:27,maybe.mp3
+105,Lye solution,Static Dress,Rouge Carpet Disaster,post-hardcore / emo / metalcore,03:13,lye_solution.mp3
+106,Unexplainabletitlesleavingyouwonderingwhy (Welcome In),Static Dress,Rouge Carpet Disaster,post-hardcore / emo / metalcore,01:46,unexplainabletitlesleavingyouwonderingwhy.mp3
+107,Marisol,Static Dress,Rouge Carpet Disaster,post-hardcore / emo / metalcore,04:53,marisol.mp3
+108,cubicle dialogue,Static Dress,Rouge Carpet Disaster,post-hardcore / emo / metalcore,04:16,cubicle_dialogue.mp3
+109,No Stars Over Bethlehem,Protest the Hero,Kezia,progressive metal / mathcore / post-hardcore,04:25,no_stars_over_bethlehem.mp3
+110,Heretics & Killers,Protest the Hero,Kezia,progressive metal / mathcore / post-hardcore,03:09,heretics_and_killers.mp3
+111,Divinity Within,Protest the Hero,Kezia,progressive metal / mathcore / post-hardcore,04:32,divinity_within.mp3
+112,Bury the Hatchet,Protest the Hero,Kezia,progressive metal / mathcore / post-hardcore,03:23,bury_the_hatchet.mp3
+113,Nautical,Protest the Hero,Kezia,progressive metal / mathcore / post-hardcore,02:57,nautical.mp3
+114,Blindfolds Aside,Protest the Hero,Kezia,progressive metal / mathcore / post-hardcore,05:59,blindfolds_aside.mp3
+115,She Who Mars the Skin of Gods,Protest the Hero,Kezia,progressive metal / mathcore / post-hardcore,03:51,she_who_mars_the_skin_of_gods.mp3
+116,Turn Soonest to the Sea,Protest the Hero,Kezia,progressive metal / mathcore / post-hardcore,06:21,turn_soonest_to_the_sea.mp3
+117,The Divine Suicide of K.,Protest the Hero,Kezia,progressive metal / mathcore / post-hardcore,05:10,the_divine_suicide_of_k.mp3
+118,A Plateful of Our Dead,Protest the Hero,Kezia,progressive metal / mathcore / post-hardcore,04:29,a_plateful_of_our_dead.mp3
+119,Beatopia Cultsong,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,02:32,beatopia_cultsong.mp3
+120,10:36,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,03:16,10_36.mp3
+121,Sunny Day,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,02:41,sunny_day.mp3
+122,See You Soon,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,03:27,see_you_soon.mp3
+123,Ripples,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,03:08,ripples.mp3
+124,The Perfect Pair,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,02:58,the_perfect_pair.mp3
+125,Broken CD,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,02:51,broken_cd.mp3
+126,Talk,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,02:39,talk.mp3
+127,Lovesong,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,04:06,lovesong.mp3
+128,Pictures of Us,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,04:40,pictures_of_us.mp3
+129,Fairy Song,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,02:45,fairy_song.mp3
+130,Dont Get the Deal,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,03:41,dont_get_the_deal.mp3
+131,Tinkerbell Is Overrated,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,03:49,tinkerbell_is_overrated.mp3
+132,Youre Here Thats the Thing,Beabadoobee,Beatopia,indie rock / indie pop / alternative rock / dream pop,03:19,youre_here_thats_the_thing.mp3
+133,Take a Bite,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,02:38,take_a_bite.mp3
+134,California,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,02:52,california.mp3
+135,One Time,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,03:05,one_time.mp3
+136,Real Man,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,02:39,real_man.mp3
+137,Tie My Shoes,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,02:58,tie_my_shoes.mp3
+138,Girl Song,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,03:57,girl_song.mp3
+139,Coming Home,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,02:15,coming_home.mp3
+140,Ever Seen,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,03:23,ever_seen.mp3
+141,A Cruel Affair,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,02:31,a_cruel_affair.mp3
+142,Post,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,02:41,post.mp3
+143,Beaches,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,03:50,beaches.mp3
+144,Everything I Want,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,03:09,everything_i_want.mp3
+145,The Man Who Left Too Soon,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,01:49,the_man_who_left_too_soon.mp3
+146,This Is How It Went,Beabadoobee,This Is How Tomorrow Moves,indie rock / dream pop / indie pop,03:36,this_is_how_it_went.mp3
+147,Animal I Have Become,Three Days Grace,One-X,post-grunge / hard rock / alternative rock,03:51,animal_i_have_become.mp3

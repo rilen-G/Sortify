@@ -16,6 +16,7 @@
     <HBox alignment="CENTER_LEFT" spacing="12">
         <Label styleClass="view-title" text="Insights" />
         <Button onAction="#refresh" styleClass="ghost-btn" text="Refresh" />
+        <Button onAction="#resetStats" styleClass="ghost-btn" text="Reset Stats" />
     </HBox>
 
     <HBox spacing="16">

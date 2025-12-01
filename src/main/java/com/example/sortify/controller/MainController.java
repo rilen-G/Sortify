@@ -36,6 +36,7 @@ public class MainController implements Initializable {
                     getClass().getResource(fxmlPath)
             );
             Parent view = loader.load();
+            FXServiceLocator.setCurrentRoute(route);
             contentHost.getChildren().setAll(view);
 
         } catch (Exception e) {

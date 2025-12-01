@@ -33,9 +33,13 @@ public class FXServiceLocator {
     private static final UndoManager undo = new UndoManager();
     private static final ObservableList<Playlist> playlists = FXCollections.observableArrayList();
     private static final ObjectProperty<Playlist> activePlaylist = new SimpleObjectProperty<>();
+    private static final ObjectProperty<MainController.Route> currentRoute =
+            new SimpleObjectProperty<>(MainController.Route.LIBRARY);
     private static LibraryController libraryController;
     private static PlaylistController playlistController;
-    private static final Path playlistCsv = Paths.get("playlists.csv");
+    private static PlayerBarController playerBarController;
+    private static final Path playlistCsv = Paths.get(System.getProperty("user.home"), ".sortify", "playlists.csv");
+    private static final Path legacyPlaylistCsv = Paths.get("playlists.csv");
     private static final Path playbackCsv = Paths.get(System.getProperty("user.home"), ".sortify", "queue_state.csv");
     private static final Path statsCsv = Paths.get(System.getProperty("user.home"), ".sortify", "play_counts.csv");
 
@@ -53,10 +57,13 @@ public class FXServiceLocator {
             loadStats();
 
             // Load playlists from csv if present
-            var loaded = PlaylistCsvStore.load(playlistCsv, library.byId());
+            var loaded = PlaylistCsvStore.load(existingPlaylistPath(), library.byId());
             if (!loaded.isEmpty()){
-                playlists.setAll(loaded.values());
-                activePlaylist.set(playlists.get(0));
+                var ordered = loaded.values().stream()
+                        .sorted(Comparator.comparing(Playlist::getName, String.CASE_INSENSITIVE_ORDER))
+                        .toList();
+                playlists.setAll(ordered);
+                activePlaylist.set(ordered.get(0));
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -84,6 +91,18 @@ public class FXServiceLocator {
 
     public static MainController getMain() {
         return main;
+    }
+
+    public static void setCurrentRoute(MainController.Route route) {
+        currentRoute.set(route);
+    }
+
+    public static MainController.Route currentRoute() {
+        return currentRoute.get();
+    }
+
+    public static ObjectProperty<MainController.Route> currentRouteProperty() {
+        return currentRoute;
     }
 
     public static LibraryRepository library(){
@@ -150,6 +169,14 @@ public class FXServiceLocator {
         return Optional.ofNullable(playlistController);
     }
 
+    public static void registerPlayerBarController(PlayerBarController c){
+        playerBarController = c;
+    }
+
+    public static Optional<PlayerBarController> playerBarController(){
+        return Optional.ofNullable(playerBarController);
+    }
+
     private static void loadPlaybackState(){
         try {
             var state = PlaybackCsvStore.load(playbackCsv, library.byId());
@@ -187,5 +214,12 @@ public class FXServiceLocator {
         } catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    private static Path existingPlaylistPath(){
+        if (java.nio.file.Files.exists(playlistCsv)) {
+            return playlistCsv;
+        }
+        return legacyPlaylistCsv;
     }
 }

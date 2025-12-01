@@ -29,6 +29,7 @@ public class PlayerBarController {
 
     @FXML
     public void initialize() {
+        FXServiceLocator.registerPlayerBarController(this);
         vol.valueProperty().addListener((obs, old, val) ->
                 FXServiceLocator.audio().setVolume(val.doubleValue() / 100.0));
         vol.setValue(65);
@@ -91,7 +92,7 @@ public class PlayerBarController {
         }
     }
 
-    private void playSong(Song s){
+    public void playSong(Song s){
         nowLabel.setText(s.getTitle() + " - " + s.getArtist());
         playPauseBtn.setText("Pause");
         playing = true;

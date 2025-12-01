@@ -1,16 +1,13 @@
 package com.example.sortify.controller;
 
 import com.example.sortify.model.Playlist;
-import com.example.sortify.model.Song;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextInputDialog;
-import javafx.stage.DirectoryChooser;
-import javafx.stage.Window;
 
-import java.io.File;
-import java.nio.file.Path;
 import java.util.Optional;
 
 public class SideBarController {
@@ -35,13 +32,7 @@ public class SideBarController {
         FXServiceLocator.activePlaylistProperty().addListener((obs, old, pl) -> {
             if (pl != null) playlistsList.getSelectionModel().select(pl);
         });
-        playlistsList.getSelectionModel().selectedItemProperty().addListener((obs, old, chosen) -> {
-            if (chosen != null) {
-                FXServiceLocator.setActivePlaylist(chosen);
-                FXServiceLocator.getMain().navigate(MainController.Route.PLAYLIST);
-                FXServiceLocator.playlistController().ifPresent(PlaylistController::refresh);
-            }
-        });
+        playlistsList.getSelectionModel().selectedItemProperty().addListener((obs, old, chosen) -> openPlaylist(chosen));
     }
 
     @FXML
@@ -80,20 +71,33 @@ public class SideBarController {
     }
 
     @FXML
-    private void importFolder() {
-        DirectoryChooser chooser = new DirectoryChooser();
-        chooser.setTitle("Import music folder");
-        Window win = playlistsList.getScene().getWindow();
-        File folder = chooser.showDialog(win);
-        if (folder == null) return;
-        try {
-            FXServiceLocator.library().importFromFolder(Path.of(folder.toURI()));
-            FXServiceLocator.libraryView().setAll(FXServiceLocator.library().getLibrary());
-            FXServiceLocator.libraryView().sort(
-                    java.util.Comparator.comparing(Song::getTitle, String.CASE_INSENSITIVE_ORDER));
-            FXServiceLocator.libraryController().ifPresent(LibraryController::refresh);
-        } catch (Exception e) {
-            e.printStackTrace();
+    private void deletePlaylist() {
+        Playlist selected = playlistsList.getSelectionModel().getSelectedItem();
+        if (selected == null) return;
+
+        Alert confirm = new Alert(Alert.AlertType.CONFIRMATION);
+        confirm.setHeaderText("Delete playlist?");
+        confirm.setContentText("Remove \"" + selected.getName() + "\" from your playlists?");
+        Optional<ButtonType> result = confirm.showAndWait();
+        if (result.isEmpty() || result.get() != ButtonType.OK) return;
+
+        int previousIndex = playlistsList.getSelectionModel().getSelectedIndex();
+        FXServiceLocator.playlists().remove(selected);
+
+        if (FXServiceLocator.playlists().isEmpty()) {
+            FXServiceLocator.setActivePlaylist(null);
+            playlistsList.getSelectionModel().clearSelection();
+        } else {
+            int nextIndex = Math.min(previousIndex, FXServiceLocator.playlists().size() - 1);
+            playlistsList.getSelectionModel().select(nextIndex);
         }
+        FXServiceLocator.savePlaylists();
+    }
+
+    private void openPlaylist(Playlist chosen){
+        if (chosen == null) return;
+        FXServiceLocator.setActivePlaylist(chosen);
+        FXServiceLocator.getMain().navigate(MainController.Route.PLAYLIST);
+        FXServiceLocator.playlistController().ifPresent(PlaylistController::refresh);
     }
 }
