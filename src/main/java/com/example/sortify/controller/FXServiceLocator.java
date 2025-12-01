@@ -117,6 +117,8 @@ public class FXServiceLocator {
         return playlists;
     }
 
+    private static QueueController queueController;
+
     public static void savePlaylists(){
         try {
             PlaylistCsvStore.save(playlistCsv, playlists);
@@ -221,5 +223,9 @@ public class FXServiceLocator {
             return playlistCsv;
         }
         return legacyPlaylistCsv;
+    }
+
+    public static void registerQueueController(QueueController controller){
+        queueController = controller;
     }
 }

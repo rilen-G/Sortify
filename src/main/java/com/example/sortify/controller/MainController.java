@@ -14,7 +14,7 @@ public class MainController implements Initializable {
     @FXML
     private StackPane contentHost;
 
-    public enum Route { LIBRARY, PLAYLIST, FORYOU, STATS }
+    public enum Route { LIBRARY, PLAYLIST, FORYOU, STATS , QUEUE}
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -29,6 +29,7 @@ public class MainController implements Initializable {
                 case PLAYLIST -> "/com/example/sortify/ui/views/playlist-view.fxml";
                 case FORYOU  -> "/com/example/sortify/ui/views/foryou-view.fxml";
                 case STATS   -> "/com/example/sortify/ui/views/stats-view.fxml";
+                case QUEUE -> "/com/example/sortify/ui/views/queue-view.fxml";
             };
 
 

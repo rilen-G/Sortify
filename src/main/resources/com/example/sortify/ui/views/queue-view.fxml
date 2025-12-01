@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.sortify.controller.QueueController"
+      spacing="16" styleClass="view">
+    <HBox alignment="CENTER_LEFT" spacing="12">
+        <Label text="Playback Queue" styleClass="view-title"/>
+        <Button text="Clear Queue" onAction="#clearQueue" styleClass="ghost-btn"/>
+    </HBox>
+
+    <TableView fx:id="queueTable" styleClass="glass">
+        <columns>
+            <TableColumn fx:id="colNum" text="#" prefWidth="50"/>
+            <TableColumn fx:id="colTitle" text="Title" prefWidth="250"/>
+            <TableColumn fx:id="colArtist" text="Artist" prefWidth="200"/>
+            <TableColumn fx:id="colAlbum" text="Album" prefWidth="200"/>
+            <TableColumn fx:id="colDuration" text="Duration" prefWidth="120"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button text="Play Selected" onAction="#playSelected" styleClass="primary-btn"/>
+        <Button text="Remove Selected" onAction="#removeSelected" styleClass="ghost-btn"/>
+        <Button text="Move Up" onAction="#moveUp" styleClass="ghost-btn"/>
+        <Button text="Move Down" onAction="#moveDown" styleClass="ghost-btn"/>
+    </HBox>
+</VBox>

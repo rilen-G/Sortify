@@ -64,11 +64,11 @@ public class PlayerBarController {
             return;
         }
         if (playing){
-            playPauseBtn.setText("Play");
+            playPauseBtn.setText("▶");
             FXServiceLocator.audio().pause();
             playing = false;
         } else {
-            playPauseBtn.setText("Pause");
+            playPauseBtn.setText("⏸");
             FXServiceLocator.audio().resume();
             playing = true;
         }
@@ -84,7 +84,7 @@ public class PlayerBarController {
             nowLabel.setText("Queue empty");
             currentTimeLabel.setText("0:00");
             totalTimeLabel.setText("0:00");
-            playPauseBtn.setText("Play");
+            playPauseBtn.setText("▶");
             playing = false;
             progress.setDisable(true);
             progress.setValue(0);
@@ -94,7 +94,7 @@ public class PlayerBarController {
 
     public void playSong(Song s){
         nowLabel.setText(s.getTitle() + " - " + s.getArtist());
-        playPauseBtn.setText("Pause");
+        playPauseBtn.setText("⏸");
         playing = true;
         s.incrementPlayCount();
         FXServiceLocator.saveStats();
@@ -145,5 +145,10 @@ public class PlayerBarController {
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
         return String.format("%d:%02d", minutes, seconds);
+    }
+
+    @FXML
+    private void goQueue() {
+        FXServiceLocator.getMain().navigate(MainController.Route.QUEUE);
     }
 }

@@ -7,8 +7,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="90" spacing="4" styleClass="player-bar" stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sortify.controller.PlayerBarController">
+<VBox alignment="CENTER" prefHeight="90" spacing="4" styleClass="player-bar" stylesheets="@../css/app.css" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.sortify.controller.PlayerBarController">
 
     <VBox alignment="CENTER" spacing="0" styleClass="progress-row">
         <Slider fx:id="progress" maxWidth="480" minWidth="480.0" prefHeight="26.0" prefWidth="480" />
@@ -25,6 +26,7 @@
             <left>
                 <VBox alignment="CENTER_LEFT" spacing="4" translateY="-12" BorderPane.alignment="CENTER_LEFT">
                     <Label fx:id="nowLabel" styleClass="muted" text="Nothing playing" />
+               <Button mnemonicParsing="false" text="☰" onAction="#goQueue" styleClass="ghost-btn" />
                 </VBox>
             </left>
             <right>
@@ -36,7 +38,10 @@
 
         <HBox alignment="CENTER" pickOnBounds="false" spacing="12">
             <Button fx:id="prevBtn" onAction="#prev" styleClass="ghost-btn" text="|&lt;" />
-            <Button fx:id="playPauseBtn" onAction="#toggle" styleClass="primary-btn" text="Play" />
+            <Button fx:id="playPauseBtn" onAction="#toggle" styleClass="primary-btn" text="⏯">
+            <font>
+               <Font size="24.0" />
+            </font></Button>
             <Button fx:id="nextBtn" onAction="#next" styleClass="ghost-btn" text="&gt;|" />
         </HBox>
 
