@@ -34,7 +34,7 @@ public class LibraryRepository {
             while ((line = br.readLine()) != null) {
                 if (line.isBlank()) continue; // skip empty rows
                 String[] t = line.split(",", -1);
-                if (t.length < 7) continue; // guard against malformed rows
+                if (t.length < 7) continue;
                 // id,title,artist,album,genre,durationSec,filePath
                 int duration = parseDuration(t[5]);
                 String rawPath = t[6];

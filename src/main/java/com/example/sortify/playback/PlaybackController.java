@@ -4,6 +4,7 @@ import com.example.sortify.model.Playlist;
 import com.example.sortify.model.Song;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class PlaybackController {
 
@@ -12,6 +13,8 @@ public class PlaybackController {
     private Song nowPlaying;
     private Runnable onChange;
     private Playlist loopPlaylist; // active playlist loop (Play All) if any
+    private boolean shuffleLoop = false;
+    private final Set<String> shuffleServed = new HashSet<>();
 
     public void enqueue(Song s){
         if (s == null) return;
@@ -37,15 +40,23 @@ public class PlaybackController {
         changed();
     }
 
-    public Optional<Song> startPlaylistLoop(Playlist playlist){
+    public Optional<Song> startPlaylistLoop(Playlist playlist, boolean shuffle){
         if (playlist == null || playlist.tracks().isEmpty()) return Optional.empty();
         if (nowPlaying != null){
             history.push(nowPlaying);
         }
         loopPlaylist = playlist;
+        shuffleLoop = shuffle;
+        shuffleServed.clear();
         queue.clear();
         nowPlaying = null;
-        queue.addAll(playlist.tracks());
+        if (shuffle){
+            var copy = new ArrayList<>(playlist.tracks());
+            java.util.Collections.shuffle(copy);
+            queue.addAll(copy);
+        } else {
+            queue.addAll(playlist.tracks());
+        }
         return playNext();
     }
 
@@ -93,6 +104,25 @@ public class PlaybackController {
     public Queue<Song> getQueue(){ return queue; }
     public Stack<Song> getHistory(){ return history; }
 
+    /**
+     * When actively looping a playlist, allow switching shuffle on/off mid-loop.
+     * Rebuilds the queue based on the current song so playback continues smoothly.
+     */
+    public void updateLoopShuffle(boolean shuffle){
+        shuffleLoop = shuffle;
+        if (!isLooping() || loopPlaylist.tracks().isEmpty()) {
+            changed();
+            return;
+        }
+        if (shuffleLoop){
+            refillShuffleQueue();
+        } else {
+            shuffleServed.clear();
+            rebuildOrderedQueue();
+            changed();
+        }
+    }
+
     private Song pullNextFromQueue(){
         Song next = queue.poll();
         if (next == null && isLooping()){
@@ -100,8 +130,15 @@ public class PlaybackController {
                 clearLoopState();
                 return null;
             }
-            queue.addAll(loopPlaylist.tracks());
+            if (shuffleLoop){
+                refillShuffleQueue();
+            } else {
+                queue.addAll(loopPlaylist.tracks());
+            }
             next = queue.poll();
+        }
+        if (shuffleLoop && next != null){
+            shuffleServed.add(next.getId());
         }
         return next;
     }
@@ -127,6 +164,45 @@ public class PlaybackController {
 
     private void clearLoopState(){
         loopPlaylist = null;
+        shuffleLoop = false;
+        shuffleServed.clear();
+    }
+
+    private void refillShuffleQueue(){
+        if (loopPlaylist == null) return;
+        var tracks = new ArrayList<>(loopPlaylist.tracks());
+        // Remaining excludes the current song
+        tracks.remove(nowPlaying);
+        List<Song> remaining = tracks.stream()
+                .filter(Objects::nonNull)
+                .filter(s -> !shuffleServed.contains(s.getId()))
+                .collect(Collectors.toCollection(ArrayList::new));
+        // If we've played all songs in this cycle, reset and start a new cycle
+        if (remaining.isEmpty()){
+            shuffleServed.clear();
+            remaining = tracks.stream()
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toCollection(ArrayList::new));
+        }
+        Collections.shuffle(remaining);
+        queue.clear();
+        queue.addAll(remaining);
+        changed();
+    }
+
+    private void rebuildOrderedQueue(){
+        if (loopPlaylist == null) return;
+        var tracks = new ArrayList<>(loopPlaylist.tracks());
+        queue.clear();
+        if (nowPlaying == null){
+            queue.addAll(tracks);
+            return;
+        }
+        int idx = tracks.indexOf(nowPlaying);
+        for (int i = 1; i <= tracks.size(); i++){
+            Song s = tracks.get((idx + i) % tracks.size());
+            queue.add(s);
+        }
     }
 
     private boolean isInQueue(Song s){

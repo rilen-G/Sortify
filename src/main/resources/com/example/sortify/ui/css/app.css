@@ -57,6 +57,17 @@
     -fx-text-fill: -accent-strong;
 }
 
+.toggle-button.ghost-btn:selected {
+    -fx-background-color: rgba(179,112,255,0.22);
+    -fx-border-color: -accent;
+    -fx-text-fill: -text;
+}
+
+.toggle-button.ghost-btn:selected:hover {
+    -fx-background-color: rgba(179,112,255,0.3);
+    -fx-border-color: -accent-strong;
+}
+
 .primary-btn {
     -fx-background-color: #b370ff;
     -fx-padding: 0 18;

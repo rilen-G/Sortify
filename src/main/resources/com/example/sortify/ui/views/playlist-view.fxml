@@ -9,6 +9,7 @@
         <Label fx:id="plTitle" text="Playlist" styleClass="view-title"/>
         <Button text="Rename" onAction="#rename" styleClass="ghost-btn"/>
         <Button text="Play All" onAction="#playAll" styleClass="primary-btn"/>
+        <ToggleButton fx:id="shuffleBtn" text="🔀 Shuffle" onAction="#toggleShuffle" styleClass="ghost-btn"/>
     </HBox>
 
     <TableView fx:id="trackList" styleClass="glass" prefHeight="500">

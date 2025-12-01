@@ -22,9 +22,11 @@ public class PlaylistController {
     @FXML private TableColumn<Song, String> colTitle;
     @FXML private TableColumn<Song, String> colArtist;
     @FXML private TableColumn<Song, String> colAlbum;
+    @FXML private ToggleButton shuffleBtn;
 
     private final ObservableList<Song> currentTracks = FXCollections.observableArrayList();
     private FilteredList<Song> filteredTracks;
+    private boolean shuffleMode = false;
 
     @FXML
     public void initialize() {
@@ -42,14 +44,24 @@ public class PlaylistController {
 
         FXServiceLocator.activePlaylistProperty().addListener((obs, old, pl) -> loadPlaylist(pl));
         loadPlaylist(FXServiceLocator.activePlaylist());
+
+        if (shuffleBtn != null){
+            shuffleMode = shuffleBtn.isSelected();
+            shuffleBtn.selectedProperty().addListener((obs, old, selected) -> shuffleMode = selected);
+        }
     }
 
     @FXML private void playAll() {
         Playlist pl = FXServiceLocator.activePlaylist();
         if (pl == null || pl.tracks().isEmpty()) return;
-        Optional<Song> first = FXServiceLocator.playback().startPlaylistLoop(pl);
+        Optional<Song> first = FXServiceLocator.playback().startPlaylistLoop(pl, shuffleMode);
         first.ifPresent(song -> FXServiceLocator.playerBarController()
                 .ifPresent(bar -> bar.playSong(song)));
+    }
+
+    @FXML private void toggleShuffle() {
+        shuffleMode = shuffleBtn != null && shuffleBtn.isSelected();
+        FXServiceLocator.playback().updateLoopShuffle(shuffleMode);
     }
 
     @FXML private void remove() {

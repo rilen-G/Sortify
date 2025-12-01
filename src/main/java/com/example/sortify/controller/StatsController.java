@@ -58,17 +58,19 @@ public class StatsController {
         List<Song> top = FXServiceLocator.stats().topN(all, 5);
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         for (Song s : top){
-            series.getData().add(new XYChart.Data<>(s.getTitle(), s.getPlayCount()));
+            series.getData().add(new XYChart.Data<>(wrapTitle(s.getTitle()), s.getPlayCount()));
         }
         int maxPlays = top.stream().mapToInt(Song::getPlayCount).max().orElse(0);
-        int upper = Math.max(3, maxPlays + 1);
+        int tickUnit = maxPlays <= 5 ? 1 : (maxPlays <= 20 ? 2 : 5);
+        int upper = Math.max(tickUnit * 2,
+                ((maxPlays + tickUnit) / tickUnit) * tickUnit);
         topYAxis.setAutoRanging(false);
         topYAxis.setLowerBound(0);
         topYAxis.setUpperBound(upper);
-        topYAxis.setTickUnit(1);
+        topYAxis.setTickUnit(tickUnit);
         topYAxis.setMinorTickCount(0);
         topAxis.setCategories(FXCollections.observableArrayList(
-                top.stream().map(Song::getTitle).collect(Collectors.toList())));
+                top.stream().map(s -> wrapTitle(s.getTitle())).collect(Collectors.toList())));
         topPlays.getData().setAll(series);
     }
 
@@ -152,5 +154,28 @@ public class StatsController {
         }
         String out = sb.toString().trim();
         return out.isEmpty() ? "Unknown" : out;
+    }
+
+    private String wrapTitle(String title){
+        if (title == null) return "";
+        String trimmed = title.trim();
+        int maxLen = 14;
+        if (trimmed.length() <= maxLen) return trimmed;
+        StringBuilder out = new StringBuilder();
+        StringBuilder line = new StringBuilder();
+        for (String word : trimmed.split("\\s+")){
+            if (line.length() + word.length() + 1 > maxLen){
+                if (!out.isEmpty()) out.append("\n");
+                out.append(line.toString().trim());
+                line.setLength(0);
+            }
+            if (line.length() > 0) line.append(" ");
+            line.append(word);
+        }
+        if (line.length() > 0){
+            if (!out.isEmpty()) out.append("\n");
+            out.append(line.toString().trim());
+        }
+        return out.toString();
     }
 }

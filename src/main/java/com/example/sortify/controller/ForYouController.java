@@ -2,14 +2,13 @@ package com.example.sortify.controller;
 
 import com.example.sortify.model.Playlist;
 import com.example.sortify.model.Song;
+import com.example.sortify.stats.RecommenderService;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ForYouController {
 
@@ -17,6 +16,8 @@ public class ForYouController {
     @FXML private TableColumn<Song, String> colTitle;
     @FXML private TableColumn<Song, String> colArtist;
     @FXML private TableColumn<Song, String> colAlbum;
+
+    private final RecommenderService recommender = new RecommenderService();
 
     @FXML
     public void initialize(){
@@ -34,11 +35,8 @@ public class ForYouController {
     private void generate() {
         List<Song> all = new ArrayList<>(FXServiceLocator.libraryView());
         if (all.isEmpty()) return;
-        all.sort(Comparator.comparingInt(Song::getPlayCount).reversed());
-        if (all.stream().allMatch(s -> s.getPlayCount() == 0)){
-            java.util.Collections.shuffle(all);
-        }
-        List<Song> picks = all.stream().limit(6).collect(Collectors.toList());
+        List<Song> recent = recentHistoryMostRecentFirst();
+        List<Song> picks = recommender.recommend(all, recent, 20);
         suggested.getItems().setAll(picks);
     }
 
@@ -54,5 +52,14 @@ public class ForYouController {
         suggested.getItems().forEach(playlist::add);
         FXServiceLocator.playlistController().ifPresent(PlaylistController::refresh);
         FXServiceLocator.savePlaylists();
+    }
+
+    private List<Song> recentHistoryMostRecentFirst(){
+        var history = FXServiceLocator.playback().getHistory();
+        List<Song> recent = new ArrayList<>();
+        for (int i = history.size() - 1; i >= 0; i--){
+            recent.add(history.get(i));
+        }
+        return recent;
     }
 }
